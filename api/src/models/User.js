@@ -22,10 +22,6 @@ module.exports = (sequelize) => {
       picture:{
         type:DataTypes.STRING,
       },
-      admin: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
     },
     { timestamps: false }
   );
