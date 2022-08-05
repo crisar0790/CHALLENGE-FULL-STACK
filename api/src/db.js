@@ -29,7 +29,7 @@ const { User, Income, Expense, Category } = sequelize.models;
 
 User.hasMany(Income);
 User.hasMany(Expense);
-User.hasOne(Category);
+Expense.hasOne(Category);
 
 module.exports = {
   ...sequelize.models,
