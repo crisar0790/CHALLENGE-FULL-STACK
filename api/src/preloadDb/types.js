@@ -1,9 +1,9 @@
 const types = [
     {
-        type: Income
+        type: 'Income'
     },
     {
-        type: Expense
+        type: 'Expense'
     }
 ]
 

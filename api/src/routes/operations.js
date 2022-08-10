@@ -14,11 +14,17 @@ router.post('/', verifyToken, async (req, res) => {
                 date
             });
             await newOperation.setUser(id);
+            const newOperationType = await Type.findOne({where: {type: type}})
+            await newOperation.setType(newOperationType.id);
+            const newOperationCategory = await Category.findOne({where: {category: category}});
+            if (newOperationCategory.typeId === null) {
+                await newOperationCategory.setType(newOperationType.id);
+            }
             res.status(201).json(newOperation);
         }
     } catch (error) {
         console.log(error)
     }
-})
+});
 
 module.exports = router;
