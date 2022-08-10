@@ -12,15 +12,10 @@ router.post('/', verifyToken, async (req, res) => {
                 concept,
                 amount,
                 date,
-                userId: id
-            }, {
-                include: [{
-                    model: User,
-                    where: {id: id}
-                }]
+                //userId: id
             });
             // let opUser = await User.findByPk(id);
-            // await newOperation.addUser(opUser);
+            await newOperation.setUser(id);
             res.status(201).json(newOperation);
         }
     } catch (error) {
