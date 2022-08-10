@@ -11,10 +11,8 @@ router.post('/', verifyToken, async (req, res) => {
             const newOperation = await Operation.create({
                 concept,
                 amount,
-                date,
-                //userId: id
+                date
             });
-            // let opUser = await User.findByPk(id);
             await newOperation.setUser(id);
             res.status(201).json(newOperation);
         }
