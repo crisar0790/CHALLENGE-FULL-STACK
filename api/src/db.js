@@ -25,16 +25,19 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User, Operation, TypeOperation, Category } = sequelize.models;
+const { User, Operation, Type, Category } = sequelize.models;
 
-User.belongsToMany(TypeOperation, {through: 'userTypeOp'});
-TypeOperation.belongsToMany(User, {through: 'userTypeOp'});
+// User.hasMany(Income);
+// User.hasMany(Expense);
+// Expense.hasOne(Category);
+User.hasMany(Operation);
+Operation.belongsTo(User);
 
-TypeOperation.belongsToMany(Category, {through: 'typeOpCategory'});
-Category.belongsToMany(TypeOperation, {through: 'typeOpCategory'});
+Type.hasMany(Operation);
+Operation.belongsTo(Type);
 
-Category.belongsToMany(Operation, {through: 'categoryOp'});
-Operation.belongsToMany(Category, {through: 'categoryOp'});
+Type.hasMany(Category)
+Category.belongsTo(Type);
 
 module.exports = {
   ...sequelize.models,
