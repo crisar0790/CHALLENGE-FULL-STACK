@@ -36,8 +36,8 @@ Operation.belongsTo(User);
 Type.hasMany(Operation);
 Operation.belongsTo(Type);
 
-Type.hasMany(Category)
-Category.belongsTo(Type);
+Category.hasMany(Operation)
+Operation.belongsTo(Category);
 
 module.exports = {
   ...sequelize.models,
