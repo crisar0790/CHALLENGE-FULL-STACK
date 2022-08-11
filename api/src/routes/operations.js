@@ -5,17 +5,16 @@ const { User, Operation, Category, Type } = require('../db');
 //------------------------ Create ------------------------
 
 router.post('/', verifyToken, async (req, res) => {
-    const { concept, amount, date, type, category } = req.body;
-    const { id } = req.query;
+    const { amount, date, type, category } = req.body;
+    const { userId } = req.query;
     try {
-        if (!concept || !amount || !date || !type || !category || !id) res.status(400).json('Missing information in any of the required fields')
-        if (concept, amount, date, type, category, id) {
+        if (!amount || !date || !type || !category || !userId) res.status(400).json('Missing information in any of the required fields')
+        if (amount, date, type, category, userId) {
             const newOperation = await Operation.create({
-                concept,
                 amount,
                 date
             });
-            await newOperation.setUser(id);
+            await newOperation.setUser(userId);
             const newOperationType = await Type.findOne({ where: { type: type } })
             await newOperation.setType(newOperationType.id);
             const newOperationCategory = await Category.findOne({ where: { category: category } });
@@ -30,14 +29,16 @@ router.post('/', verifyToken, async (req, res) => {
 //------------------------ GET ------------------------
 
 router.get('/', verifyToken, async (req, res) => {
-    const { bType, bCategory } = req.body;
+    const { type, category } = req.body;
     const { userId, qNew } = req.query;
-    if(!userId) return res.status(400).json('Missing userId');
+    if (!userId) return res.status(400).json('Missing userId');
+    const oneType = type ? await Type.findOne({ where: { type: type } }) : undefined;
+    const oneCategory = category ? await Category.findOne({ where: { category: category } }) : undefined;
     try {
         let operations;
         if (qNew) {
             let ops = await Operation.findAll({
-                where: {userId: userId},
+                where: { userId: userId },
                 include: [
                     {
                         model: Type,
@@ -51,23 +52,9 @@ router.get('/', verifyToken, async (req, res) => {
             });
             await ops.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
             operations = await ops.slice(0, 10);
-        } else if (bType && !bCategory) {
+        } else if (type && !category) {
             operations = await Operation.findAll({
-                where: {userId: userId},
-                include: [
-                    {
-                        model: Type,
-                        attributes: { ['type']: bType }
-                    },
-                    {
-                        model: Category,
-                        attributes: ['category']
-                    }
-                ]
-            });
-        } else if (!bType && bCategory) {
-            operations = await Operation.findAll({
-                where: {userId: userId},
+                where: { userId: userId, typeId: oneType.id },
                 include: [
                     {
                         model: Type,
@@ -75,27 +62,41 @@ router.get('/', verifyToken, async (req, res) => {
                     },
                     {
                         model: Category,
-                        attributes: { ['category']: bCategory }
+                        attributes: ['category']
                     }
                 ]
             });
-        } else if (bType && bCategory) {
+        } else if (!type && category) {
             operations = await Operation.findAll({
-                where: {userId: userId},
+                where: { userId: userId, categoryId: oneCategory.id },
                 include: [
                     {
                         model: Type,
-                        attributes: { ['type']: bType }
+                        attributes: ['type']
                     },
                     {
                         model: Category,
-                        attributes: { ['category']: bCategory }
+                        attributes: ['category']
+                    }
+                ]
+            });
+        } else if (type && category) {
+            operations = await Operation.findAll({
+                where: { userId: userId, typeId: oneType.id, categoryId: oneCategory.id },
+                include: [
+                    {
+                        model: Type,
+                        attributes: ['type']
+                    },
+                    {
+                        model: Category,
+                        attributes: ['category']
                     }
                 ]
             });
         } else {
             operations = await Operation.findAll({
-                where: {userId: userId},
+                where: { userId: userId },
                 include: [
                     {
                         model: Type,
