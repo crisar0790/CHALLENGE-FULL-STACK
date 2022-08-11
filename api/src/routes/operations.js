@@ -181,6 +181,34 @@ router.get('/', verifyToken, async (req, res) => {
     } catch (error) {
         console.log(error)
     }
-})
+});
+
+router.get('/balance', verifyToken, async (req, res) => {
+    const { userId } = req.query;
+    try {
+        let total;
+        let incomeType = await Type.findOne({ where: { type: 'Income' } });
+        let expenseType = await Type.findOne({ where: { type: 'Expense' } });
+        let income = await Operation.findAll({ where: { userId: userId, typeId: incomeType.id } });
+        let expense = await Operation.findAll({ where: { userId: userId, typeId: expenseType.id } });
+        let incomeTotal = 0;
+        let expenseTotal = 0;
+        for (let i of income) {
+            incomeTotal += i.amount;
+        }
+        for (let e of expense) {
+            expenseTotal += e.amount;
+        }
+        total = incomeTotal - expenseTotal;
+        const totalOperation = {
+            total: total,
+            income: incomeTotal,
+            expense: expenseTotal
+        }
+        res.status(200).json(totalOperation);
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 module.exports = router;
