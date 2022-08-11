@@ -2,13 +2,13 @@ const router = require('express').Router();
 const { verifyToken } = require('./verifyToken');
 const { User, Operation, Category, Type } = require('../db');
 
-//------------------------ Create ------------------------
+//------------------------ CREATE ------------------------
 
-router.post('/', verifyToken, async (req, res) => {
+router.post('/create', verifyToken, async (req, res) => {
     const { amount, date, type, category } = req.body;
     const { userId } = req.query;
     try {
-        if (!amount || !date || !type || !category || !userId) res.status(400).json('Missing information in any of the required fields')
+        if (!amount || !date || !type || !category || !userId) res.status(400).json('Missing information in any of the required fields');
         if (amount, date, type, category, userId) {
             const newOperation = await Operation.create({
                 amount,
@@ -22,7 +22,67 @@ router.post('/', verifyToken, async (req, res) => {
             res.status(201).json(newOperation);
         }
     } catch (error) {
-        console.log(error)
+        res.status(400).json(error);
+    }
+});
+
+//------------------------ UPDATE ------------------------
+
+router.patch('/modify', verifyToken, async (req, res) => {
+    const { id } = req.query;
+    const { amount, date, category } = req.body;
+    if (!id) return res.status(400).json('Missing information in any of the required fields');
+    try {
+        if (!amount && !date && !category) res.status(400).json('Missing information in any of the required fields');
+        if (amount && !date && !category) {
+            const operationUpdate = await Operation.update(
+                { amount: amount },
+                { where: { id: id } }
+            );
+            res.status(201).json('Operation updated');
+        } else if (amount && date && !category) {
+            const operationUpdate = await Operation.update(
+                { amount: amount, date: date },
+                { where: { id: id } }
+            );
+            res.status(201).json('Operation updated');
+        } else if (amount && !date && category) {
+            const categoryUpdated = await Category.findOne({ where: { category: category } });
+            await Operation.update(
+                { amount: amount, categoryId: categoryUpdated.id },
+                { where: { id: id } }
+            );
+            res.status(201).json('Operation updated');
+        } else if (!amount && date && !category) {
+            const operationUpdate = await Operation.update(
+                { date: date },
+                { where: { id: id } }
+            );
+            res.status(201).json('Operation updated');
+        } else if (!amount && date && category) {
+            const categoryUpdated = await Category.findOne({ where: { category: category } });
+            await Operation.update(
+                { date: date, categoryId: categoryUpdated.id },
+                { where: { id: id } }
+            );
+            res.status(201).json('Operation updated');
+        } else if (!amount && !date && category) {
+            const categoryUpdated = await Category.findOne({ where: { category: category } });
+            await Operation.update(
+                { categoryId: categoryUpdated.id },
+                { where: { id: id } }
+            );
+            res.status(201).json('Operation updated');
+        } else if (amount && date && category) {
+            const categoryUpdated = await Category.findOne({ where: { category: category } });
+            await Operation.update(
+                { amount: amount, date: date, categoryId: categoryUpdated.id },
+                { where: { id: id } }
+            );
+            res.status(201).json('Operation updated');
+        } 
+        } catch (error) {
+        res.status(400).json(error);
     }
 });
 
@@ -182,6 +242,8 @@ router.get('/', verifyToken, async (req, res) => {
         console.log(error)
     }
 });
+
+//------------------------ GET BALANCE ------------------------
 
 router.get('/balance', verifyToken, async (req, res) => {
     const { userId } = req.query;
