@@ -35,7 +35,7 @@ router.patch('/modify', verifyToken, async (req, res) => {
     if (!id) return res.status(400).json('Missing information in any of the required fields');
     try {
         if (!concept && !amount && !date && !category) res.status(400).json('Missing information in any of the required fields');
-        
+
         if (concept && !amount && !date && !category) {
             await Operation.update(
                 { concept: concept },
@@ -134,9 +134,24 @@ router.patch('/modify', verifyToken, async (req, res) => {
                 { where: { id: id } }
             );
             res.status(201).json('Operation updated');
-        } 
-        } catch (error) {
+        }
+    } catch (error) {
         res.status(400).json(error);
+    }
+});
+
+//------------------------ DELETE ------------------------
+
+router.delete('/delete/:id', verifyToken, async (req, res) => {
+    const { id } = req.params;
+    try {
+        const operation = await Operation.findByPk(id);
+        if (operation) {
+            await operation.destroy();
+            res.status(200).json('Operation deleted')
+        }
+    } catch (error) {
+        console.log(error)
     }
 });
 
