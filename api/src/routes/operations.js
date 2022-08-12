@@ -5,12 +5,13 @@ const { User, Operation, Category, Type } = require('../db');
 //------------------------ CREATE ------------------------
 
 router.post('/create', verifyToken, async (req, res) => {
-    const { amount, date, type, category } = req.body;
+    const { concept, amount, date, type, category } = req.body;
     const { userId } = req.query;
     try {
-        if (!amount || !date || !type || !category || !userId) res.status(400).json('Missing information in any of the required fields');
+        if (!concept || !amount || !date || !type || !category || !userId) res.status(400).json('Missing information in any of the required fields');
         if (amount, date, type, category, userId) {
             const newOperation = await Operation.create({
+                concept,
                 amount,
                 date
             });
@@ -30,50 +31,103 @@ router.post('/create', verifyToken, async (req, res) => {
 
 router.patch('/modify', verifyToken, async (req, res) => {
     const { id } = req.query;
-    const { amount, date, category } = req.body;
+    const { concept, amount, date, category } = req.body;
     if (!id) return res.status(400).json('Missing information in any of the required fields');
     try {
-        if (!amount && !date && !category) res.status(400).json('Missing information in any of the required fields');
-        if (amount && !date && !category) {
-            const operationUpdate = await Operation.update(
+        if (!concept && !amount && !date && !category) res.status(400).json('Missing information in any of the required fields');
+        
+        if (concept && !amount && !date && !category) {
+            await Operation.update(
+                { concept: concept },
+                { where: { id: id } }
+            );
+            res.status(201).json('Operation updated');
+        } else if (concept && amount && !date && !category) {
+            await Operation.update(
+                { concept: concept, amount: amount },
+                { where: { id: id } }
+            );
+            res.status(201).json('Operation updated');
+        } else if (concept && amount && date && !category) {
+            await Operation.update(
+                { concept: concept, amount: amount, date: date },
+                { where: { id: id } }
+            );
+            res.status(201).json('Operation updated');
+        } else if (concept && amount && !date && category) {
+            const categoryUpdated = await Category.findOne({ where: { category: category } });
+            await Operation.update(
+                { concept: concept, amount: amount, categoryId: categoryUpdated.id },
+                { where: { id: id } }
+            );
+            res.status(201).json('Operation updated');
+        } else if (concept && !amount && date && !category) {
+            await Operation.update(
+                { concept: concept, date: date },
+                { where: { id: id } }
+            );
+            res.status(201).json('Operation updated');
+        } else if (concept && !amount && date && category) {
+            const categoryUpdated = await Category.findOne({ where: { category: category } });
+            await Operation.update(
+                { concept: concept, date: date, categoryId: categoryUpdated.id },
+                { where: { id: id } }
+            );
+            res.status(201).json('Operation updated');
+        } else if (concept && !amount && !date && category) {
+            const categoryUpdated = await Category.findOne({ where: { category: category } });
+            await Operation.update(
+                { concept: concept, categoryId: categoryUpdated.id },
+                { where: { id: id } }
+            );
+            res.status(201).json('Operation updated');
+        } else if (concept && amount && date && category) {
+            const categoryUpdated = await Category.findOne({ where: { category: category } });
+            await Operation.update(
+                { concept: concept, amount: amount, date: date, categoryId: categoryUpdated.id },
+                { where: { id: id } }
+            );
+            res.status(201).json('Operation updated');
+        } else if (!concept && amount && !date && !category) {
+            await Operation.update(
                 { amount: amount },
                 { where: { id: id } }
             );
             res.status(201).json('Operation updated');
-        } else if (amount && date && !category) {
-            const operationUpdate = await Operation.update(
+        } else if (!concept && amount && date && !category) {
+            await Operation.update(
                 { amount: amount, date: date },
                 { where: { id: id } }
             );
             res.status(201).json('Operation updated');
-        } else if (amount && !date && category) {
+        } else if (!concept && amount && !date && category) {
             const categoryUpdated = await Category.findOne({ where: { category: category } });
             await Operation.update(
                 { amount: amount, categoryId: categoryUpdated.id },
                 { where: { id: id } }
             );
             res.status(201).json('Operation updated');
-        } else if (!amount && date && !category) {
-            const operationUpdate = await Operation.update(
+        } else if (!concept && !amount && date && !category) {
+            await Operation.update(
                 { date: date },
                 { where: { id: id } }
             );
             res.status(201).json('Operation updated');
-        } else if (!amount && date && category) {
+        } else if (!concept && !amount && date && category) {
             const categoryUpdated = await Category.findOne({ where: { category: category } });
             await Operation.update(
                 { date: date, categoryId: categoryUpdated.id },
                 { where: { id: id } }
             );
             res.status(201).json('Operation updated');
-        } else if (!amount && !date && category) {
+        } else if (!concept && !amount && !date && category) {
             const categoryUpdated = await Category.findOne({ where: { category: category } });
             await Operation.update(
                 { categoryId: categoryUpdated.id },
                 { where: { id: id } }
             );
             res.status(201).json('Operation updated');
-        } else if (amount && date && category) {
+        } else if (!concept && amount && date && category) {
             const categoryUpdated = await Category.findOne({ where: { category: category } });
             await Operation.update(
                 { amount: amount, date: date, categoryId: categoryUpdated.id },
