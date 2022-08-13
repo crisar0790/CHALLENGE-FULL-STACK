@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { MdAccountBalance } from 'react-icons/md';
 import { FaUserCircle } from 'react-icons/fa';
+import Register from './Register';
 
 const Container = styled.div`
     height: 60px;
@@ -42,10 +43,13 @@ const MenuItem = styled.div`
     font-size: 14px;
     cursor: pointer;
     margin-left: 25px;
+    text-decoration: none;
 `;
 
 const Navbar = () => {
     const user = false;
+    const [show, setShow] = useState(false);
+
     return (
         <Container>
             <Wrapper>
@@ -63,10 +67,11 @@ const Navbar = () => {
                         </Right>
                         :
                         <Right>
-                            <MenuItem>REGISTER</MenuItem>
+                            <MenuItem onClick={() => setShow(true)}>REGISTER</MenuItem>
                             <MenuItem>LOG IN</MenuItem>
                         </Right>
                 }
+                <Register show={show} onClose={() => setShow(false)} />
             </Wrapper>
         </Container>
     )
