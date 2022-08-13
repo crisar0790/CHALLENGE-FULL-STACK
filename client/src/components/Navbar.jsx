@@ -8,7 +8,7 @@ import Login from './Login';
 const Container = styled.div`
     height: 60px;
     border-bottom: 1px solid gray;
-    box-shadow: 0 8px 2px -2px gray;
+    box-shadow: 0 8px 2px -2px teal;
 `;
 
 const Wrapper = styled.div`
