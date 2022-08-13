@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {AiOutlineCloseSquare} from 'react-icons/ai';
+import {GrClose} from 'react-icons/gr';
 
 const Container = styled.div`
     min-height: 100vh;
@@ -29,8 +29,8 @@ const Wrapper = styled.div`
 
 const ButtonClose = styled.button`
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
+    top: 1rem;
+    right: 1rem;
     outline: none;
     border: none;
     font-size: 17px;
@@ -57,12 +57,13 @@ const Input = styled.input`
 
 const Agreement = styled.span`
     font-size: 12px;
-    margin: 20px 0px;
+    margin: 20px 5px;
 `;
 
 const Button = styled.button`
-    width: 100%;
+    min-width: 40%;
     border: none;
+    margin: 10px 5px;
     padding: 15px 20px;
     background-color: teal;
     color: white;
@@ -74,7 +75,7 @@ const Register = ({showRegister, onClose}) => {
     return (
         <Container>
             <Wrapper>
-                <ButtonClose><AiOutlineCloseSquare style={{ fontSize: "1.5em", cursor: "pointer" }} onClick={onClose} /></ButtonClose>
+                <ButtonClose><GrClose style={{ fontSize: "1em", cursor: "pointer" }} onClick={onClose} /></ButtonClose>
                 <Title>CREATE AN ACCOUNT</Title>
                 <Form>
                     <Input placeholder='first name' />
