@@ -49,7 +49,7 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
-    const user = true;
+    const user = false;
     const [showRegister, setShowRegister] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
     const [showLogout, setShowLogout] = useState(false);
