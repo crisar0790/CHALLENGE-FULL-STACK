@@ -4,6 +4,7 @@ import { MdAccountBalance } from 'react-icons/md';
 import { FaUserCircle } from 'react-icons/fa';
 import Register from './Register';
 import Login from './Login';
+import PopupLogout from './PopupLogout';
 
 const Container = styled.div`
     height: 60px;
@@ -48,9 +49,10 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
-    const user = false;
+    const user = true;
     const [showRegister, setShowRegister] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
+    const [showLogout, setShowLogout] = useState(false);
 
     return (
         <Container>
@@ -64,7 +66,7 @@ const Navbar = () => {
                 {
                     user ?
                         <Right>
-                            <MenuItem>LOG OUT</MenuItem>
+                            <MenuItem onClick={() => setShowLogout(true)}>LOG OUT</MenuItem>
                             <FaUserCircle style={{ fontSize: "2em", paddingLeft: "25px", cursor: "pointer" }} />
                         </Right>
                         :
@@ -75,6 +77,7 @@ const Navbar = () => {
                 }
                 <Register showRegister={showRegister} onClose={() => setShowRegister(false)} />
                 <Login showLogin={showLogin} onClose={() => setShowLogin(false)} register={() => {setShowLogin(false); setShowRegister(true)}} />
+                <PopupLogout showLogout={showLogout} onClose={() => setShowLogout(false)} />
             </Wrapper>
         </Container>
     )
