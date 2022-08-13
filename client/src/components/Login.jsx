@@ -56,7 +56,8 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-    width: 100%;
+    min-width: 40%;
+    margin: 10px 5px;
     border: none;
     padding: 15px 20px;
     background-color: teal;
@@ -65,7 +66,7 @@ const Button = styled.button`
 `;
 
 const Link = styled.a`
-    margin-top: 20px;
+    margin: 10px 5px;
     font-size: 12px;
     text-decoration: underline;
     cursor: pointer;
