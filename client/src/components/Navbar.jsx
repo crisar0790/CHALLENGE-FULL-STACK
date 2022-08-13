@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { MdAccountBalance } from 'react-icons/md';
 import { FaUserCircle } from 'react-icons/fa';
 import Register from './Register';
+import Login from './Login';
 
 const Container = styled.div`
     height: 60px;
@@ -49,6 +50,7 @@ const MenuItem = styled.div`
 const Navbar = () => {
     const user = false;
     const [showRegister, setShowRegister] = useState(false);
+    const [showLogin, setShowLogin] = useState(false);
 
     return (
         <Container>
@@ -68,10 +70,11 @@ const Navbar = () => {
                         :
                         <Right>
                             <MenuItem onClick={() => setShowRegister(true)}>REGISTER</MenuItem>
-                            <MenuItem>LOG IN</MenuItem>
+                            <MenuItem onClick={() => setShowLogin(true)}>LOG IN</MenuItem>
                         </Right>
                 }
                 <Register showRegister={showRegister} onClose={() => setShowRegister(false)} />
+                <Login showLogin={showLogin} onClose={() => setShowLogin(false)} register={() => {setShowLogin(false); setShowRegister(true)}} />
             </Wrapper>
         </Container>
     )
