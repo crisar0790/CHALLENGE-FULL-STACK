@@ -69,8 +69,8 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
-const Register = ({show, onClose}) => {
-    if (!show) return null;
+const Register = ({showRegister, onClose}) => {
+    if (!showRegister) return null;
     return (
         <Container>
             <Wrapper>

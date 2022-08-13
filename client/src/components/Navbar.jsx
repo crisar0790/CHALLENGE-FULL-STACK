@@ -48,7 +48,7 @@ const MenuItem = styled.div`
 
 const Navbar = () => {
     const user = false;
-    const [show, setShow] = useState(false);
+    const [showRegister, setShowRegister] = useState(false);
 
     return (
         <Container>
@@ -67,11 +67,11 @@ const Navbar = () => {
                         </Right>
                         :
                         <Right>
-                            <MenuItem onClick={() => setShow(true)}>REGISTER</MenuItem>
+                            <MenuItem onClick={() => setShowRegister(true)}>REGISTER</MenuItem>
                             <MenuItem>LOG IN</MenuItem>
                         </Right>
                 }
-                <Register show={show} onClose={() => setShow(false)} />
+                <Register showRegister={showRegister} onClose={() => setShowRegister(false)} />
             </Wrapper>
         </Container>
     )
