@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Operations from './Operations';
 
@@ -41,7 +42,9 @@ const LastOpertions = () => {
             <Wrapper>
                 <Title>Last Operations</Title>
                 <Operations />
-                <Button>Show more operations</Button>
+                <Link to='/operations'>
+                    <Button>Show more operations</Button>
+                </Link>
             </Wrapper>
         </Container>
     )
