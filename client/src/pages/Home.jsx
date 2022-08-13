@@ -4,7 +4,7 @@ import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import WithoutLogin from '../components/WithoutLogin';
 import styled from 'styled-components';
-import Operations from '../components/Operations';
+import LastOpertions from '../components/LastOpertions';
 
 const Container = styled.div`
     width: 100%;
@@ -24,7 +24,7 @@ const Home = () => {
                 user ?
                 <Container>
                     <Balance />
-                    <Operations /> 
+                    <LastOpertions />
                 </Container>
                 :
                 <WithoutLogin />

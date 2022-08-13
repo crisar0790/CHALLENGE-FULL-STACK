@@ -17,6 +17,7 @@ const Table = styled.table`
     margin: auto;
     width: 100%;
     line-height:2rem;
+    overflow-x: auto;
 `;
 
 const THead = styled.thead``;
