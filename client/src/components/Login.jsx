@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
 import { GrClose } from 'react-icons/gr';
+import { login } from "../redux/apiCalls";
+import { useDispatch, useSelector } from 'react-redux';
 
 const Container = styled.div`
     min-height: 100vh;
@@ -72,7 +74,22 @@ const Link = styled.a`
     cursor: pointer;
 `;
 
+const Error = styled.span`
+    color: red;
+`;
+
 const Login = ({ showLogin, onClose, register }) => {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const dispatch = useDispatch();
+    const { isFetching, error } = useSelector((state) => state.user);
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        login(dispatch, { email, password })
+    }
+
     if (!showLogin) return null;
     return (
         <Container>
@@ -80,9 +97,10 @@ const Login = ({ showLogin, onClose, register }) => {
                 <ButtonClose><GrClose style={{ fontSize: "1em", cursor: "pointer" }} onClick={onClose} /></ButtonClose>
                 <Title>LOGIN</Title>
                 <Form>
-                    <Input placeholder='email' />
-                    <Input type='password' placeholder='password' />
-                    <Button>LOGIN</Button>
+                    <Input placeholder='email' onChange={(e) => {setEmail(e.target.value)}} />
+                    <Input type='password' placeholder='password' onChange={(e) => {setPassword(e.target.value)}} />
+                    <Button onClick={{handleClick, onClose}} disabled={isFetching}>LOGIN</Button>
+                    {error && <Error>Something went wrong...</Error>}
                     <Link onClick={register}>CREATE A NEW ACCOUNT</Link>
                 </Form>
             </Wrapper>
