@@ -9,6 +9,7 @@ import Balance from '../components/Balance';
 const Container = styled.div`
     width: 100%;
     padding-top: 6em;
+    padding-bottom: 3em;
     display: flex;
     align-items: center;
     justify-content: center;
