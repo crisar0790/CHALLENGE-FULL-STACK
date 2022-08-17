@@ -8,6 +8,10 @@ import PopupLogout from './PopupLogout';
 
 const Container = styled.div`
     height: 60px;
+    width: 100%;
+    top: 0;
+    position: fixed;
+    background-color: white;
     border-bottom: 1px solid gray;
     box-shadow: 0 8px 2px -2px teal;
 `;
