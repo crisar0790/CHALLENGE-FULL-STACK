@@ -12,7 +12,8 @@ const Wrapper = styled.div`
     width: 40%;
     padding: 20px;
     background-color: white;
-    border: 1px solid gray;
+    border: 1px solid teal;
+    box-shadow: 0 8px 2px -2px teal;
     box-sizing: border-box;
     font-size: 1.3rem;
 `;
