@@ -43,7 +43,7 @@ const LastOpertions = () => {
                 <Title>Last Operations</Title>
                 <Operations />
                 <Link to='/operations'>
-                    <Button>Show more operations</Button>
+                    <Button onClick={() => window.scroll(0,0)}>Show more operations</Button>
                 </Link>
             </Wrapper>
         </Container>
