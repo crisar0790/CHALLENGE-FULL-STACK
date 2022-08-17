@@ -8,7 +8,7 @@ import LastOpertions from '../components/LastOpertions';
 
 const Container = styled.div`
     width: 100%;
-    margin-top: 2em;
+    padding-top: 6em;
     display: flex;
     align-items: center;
     justify-content: center;
