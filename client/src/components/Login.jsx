@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 import { GrClose } from 'react-icons/gr';
-import { login } from "../redux/apiCalls";
 import { useDispatch, useSelector } from 'react-redux';
+import { login } from "../actions/auth";
 
 const Container = styled.div`
     min-height: 100vh;
@@ -82,13 +82,27 @@ const Login = ({ showLogin, onClose, register }) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const { isLoggedIn } = useSelector(state => state.auth);
+    const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
-    const { isFetching, error } = useSelector((state) => state.user);
 
-    const handleClick = (e) => {
+    const handleLogin = (e) => {
         e.preventDefault();
-        login(dispatch, { email, password })
-    }
+        setLoading(true);
+        if (email && password) {
+            dispatch(login(email, password))
+                .then(() => {
+                    // props.history.push("/profile");
+                    window.location.reload();
+                })
+                .catch(() => {
+                    setLoading(false);
+                });
+        } else {
+            setLoading(false);
+        }
+    };
 
     if (!showLogin) return null;
     return (
@@ -97,10 +111,10 @@ const Login = ({ showLogin, onClose, register }) => {
                 <ButtonClose><GrClose style={{ fontSize: "1em", cursor: "pointer" }} onClick={onClose} /></ButtonClose>
                 <Title>LOGIN</Title>
                 <Form>
-                    <Input placeholder='email' onChange={(e) => {setEmail(e.target.value)}} />
-                    <Input type='password' placeholder='password' onChange={(e) => {setPassword(e.target.value)}} />
-                    <Button onClick={{handleClick, onClose}} disabled={isFetching}>LOGIN</Button>
-                    {error && <Error>Something went wrong...</Error>}
+                    <Input placeholder='email' onChange={(e) => { setEmail(e.target.value) }} />
+                    <Input type='password' placeholder='password' onChange={(e) => { setPassword(e.target.value) }} />
+                    <Button onClick={handleLogin}>LOGIN</Button>
+                    {message && <Error>{message}</Error>}
                     <Link onClick={register}>CREATE A NEW ACCOUNT</Link>
                 </Form>
             </Wrapper>
