@@ -93,7 +93,6 @@ const Login = ({ showLogin, onClose, register }) => {
         if (email && password) {
             dispatch(login(email, password))
                 .then(() => {
-                    // props.history.push("/profile");
                     window.location.reload();
                 })
                 .catch(() => {
