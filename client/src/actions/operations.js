@@ -6,7 +6,7 @@ export const getBalance = () => async (dispatch) => {
         .then((response) => {
             dispatch({
                 type: GET_BALANCE,
-                payload: response.data.totalOperation
+                payload: {balance: data}
             })
         })
 }
