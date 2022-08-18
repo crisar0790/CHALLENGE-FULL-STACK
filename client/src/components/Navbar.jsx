@@ -79,7 +79,7 @@ const Navbar = () => {
                             <MenuItem onClick={() => setShowLogin(true)}>LOG IN</MenuItem>
                         </Right>
                 }
-                <Register showRegister={showRegister} onClose={() => setShowRegister(false)} />
+                <Register showRegister={showRegister} onClose={() => setShowRegister(false)} setShowRegister={setShowRegister} />
                 <Login showLogin={showLogin} onClose={() => setShowLogin(false)} register={() => {setShowLogin(false); setShowRegister(true)}} />
                 <PopupLogout showLogout={showLogout} onClose={() => setShowLogout(false)} setShowLogout={setShowLogout} />
             </Wrapper>

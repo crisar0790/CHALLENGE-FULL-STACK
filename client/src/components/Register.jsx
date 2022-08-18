@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import {GrClose} from 'react-icons/gr';
+import { GrClose } from 'react-icons/gr';
+import { register } from "../actions/auth";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div`
     min-height: 100vh;
@@ -70,7 +72,21 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
-const Register = ({showRegister, onClose}) => {
+const Register = ({ showRegister, onClose, setShowRegister }) => {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const dispatch = useDispatch(); 
+
+    const handleRegister = (e) => {
+        e.preventDefault();
+        if (firstName, lastName, email, password) {
+            dispatch(register(firstName, lastName, email, password));
+        }
+        setShowRegister(false);
+    };
+
     if (!showRegister) return null;
     return (
         <Container>
@@ -78,16 +94,16 @@ const Register = ({showRegister, onClose}) => {
                 <ButtonClose><GrClose style={{ fontSize: "1em", cursor: "pointer" }} onClick={onClose} /></ButtonClose>
                 <Title>CREATE AN ACCOUNT</Title>
                 <Form>
-                    <Input placeholder='first name' />
-                    <Input placeholder='last name' />
-                    <Input placeholder='email' />
-                    <Input type='password' placeholder='password' />
+                    <Input placeholder='first name' onChange={(e) => { setFirstName(e.target.value) }} />
+                    <Input placeholder='last name' onChange={(e) => { setLastName(e.target.value) }} />
+                    <Input placeholder='email' onChange={(e) => { setEmail(e.target.value) }} />
+                    <Input type='password' placeholder='password' onChange={(e) => { setPassword(e.target.value) }} />
                     <Input type='password' placeholder='confirm password' />
                     <Agreement>
                         By creating an account, I consent to the processing of my personal
                         data in accordance with the <b>PRIVACY POLICY</b>
                     </Agreement>
-                    <Button>CREATE</Button>
+                    <Button onClick={handleRegister}>CREATE</Button>
                 </Form>
             </Wrapper>
         </Container>
