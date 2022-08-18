@@ -17,6 +17,7 @@ const Container = styled.div`
 
 const Home = () => {
     const user = JSON.parse(localStorage.getItem("user"));
+    console.log(JSON.parse(localStorage.getItem("user")))
     return (
         <div>
             <Navbar />
