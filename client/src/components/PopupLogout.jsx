@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
+import { logout } from "../actions/auth";
+import { useDispatch } from 'react-redux';
 
 const Container = styled.div`
     min-height: 100vh;
@@ -53,8 +55,16 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
-const PopupLogout = ({ showLogout, onClose }) => {
-    if(!showLogout) return null;
+const PopupLogout = ({ showLogout, onClose, setShowLogout }) => {
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        console.log('funciona');
+        dispatch(logout());
+        window.location.reload();
+        setShowLogout(false);
+    }
+    if (!showLogout) return null;
     return (
         <Container>
             <Wrapper>
@@ -62,7 +72,7 @@ const PopupLogout = ({ showLogout, onClose }) => {
                 <Question>Are you sure you want to log out?</Question>
                 <ButtonContainer>
                     <Button onClick={onClose} >Cancel</Button>
-                    <Button>LOG OUT</Button>
+                    <Button onClick={handleLogout}>LOG OUT</Button>
                 </ButtonContainer>
             </Wrapper>
         </Container>

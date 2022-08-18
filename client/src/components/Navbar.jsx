@@ -53,7 +53,7 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
-    const user = false;
+    const user = JSON.parse(localStorage.getItem("user"));
     const [showRegister, setShowRegister] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
     const [showLogout, setShowLogout] = useState(false);
@@ -81,7 +81,7 @@ const Navbar = () => {
                 }
                 <Register showRegister={showRegister} onClose={() => setShowRegister(false)} />
                 <Login showLogin={showLogin} onClose={() => setShowLogin(false)} register={() => {setShowLogin(false); setShowRegister(true)}} />
-                <PopupLogout showLogout={showLogout} onClose={() => setShowLogout(false)} />
+                <PopupLogout showLogout={showLogout} onClose={() => setShowLogout(false)} setShowLogout={setShowLogout} />
             </Wrapper>
         </Container>
     )

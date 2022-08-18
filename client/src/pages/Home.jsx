@@ -5,7 +5,6 @@ import Navbar from '../components/Navbar'
 import WithoutLogin from '../components/WithoutLogin';
 import styled from 'styled-components';
 import LastOpertions from '../components/LastOpertions';
-import { useSelector } from 'react-redux';
 
 const Container = styled.div`
     width: 100%;
