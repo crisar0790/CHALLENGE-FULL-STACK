@@ -6,7 +6,7 @@ import WithoutLogin from '../components/WithoutLogin';
 import styled from 'styled-components';
 import LastOpertions from '../components/LastOpertions';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBalance } from '../actions/operations';
+import { getBalance, getLastOperations } from '../actions/operations';
 
 const Container = styled.div`
     width: 100%;
@@ -21,10 +21,12 @@ const Home = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const dispatch = useDispatch();
     const balance = useSelector(state => state.balance);
+    const lastOperations = useSelector(state => state.lastOperations);
 
     useEffect(() => {
         if (user) {
             dispatch(getBalance());
+            dispatch(getLastOperations());
         }
     },[user, dispatch]);
 
@@ -35,7 +37,7 @@ const Home = () => {
                 user ?
                     <Container>
                         <Balance balance={balance} />
-                        <LastOpertions />
+                        <LastOpertions lastOperations={lastOperations} />
                     </Container>
                     :
                     <WithoutLogin />
