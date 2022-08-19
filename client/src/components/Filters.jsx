@@ -42,7 +42,7 @@ const FilterSelect = styled.select`
 
 const FilterOption = styled.option``;
 
-const Filters = () => {
+const Filters = ({types}) => {
     return (
         <Container>
             <Wrapper>
@@ -56,8 +56,12 @@ const Filters = () => {
                     <Filter>
                         <FilterTitle>Type</FilterTitle>
                         <FilterSelect>
-                            <FilterOption>Income</FilterOption>
-                            <FilterOption>Expense</FilterOption>
+                            <FilterOption>All types</FilterOption>
+                            {
+                                types.map((t, k) => (
+                                    <FilterOption key={k} >{t.type}</FilterOption>
+                                ))
+                            }
                         </FilterSelect>
                     </Filter>
                     <Filter>

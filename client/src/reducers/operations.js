@@ -1,8 +1,9 @@
-import { GET_BALANCE, GET_LAST_OPERATIONS } from "../actions/types";
+import { GET_BALANCE, GET_LAST_OPERATIONS, GET_TYPES } from "../actions/types";
 
 const initialState = {
     balance: {},
-    lastOperations: []
+    lastOperations: [],
+    types: []
 };
 
 export default function (state = initialState, action) {
@@ -17,6 +18,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 lastOperations: payload
+            };
+        case GET_TYPES:
+            return {
+                ...state,
+                types: payload
             }
         default:
             return state;

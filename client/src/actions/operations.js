@@ -1,4 +1,4 @@
-import { GET_BALANCE, GET_LAST_OPERATIONS } from "./types";
+import { GET_BALANCE, GET_LAST_OPERATIONS, GET_TYPES } from "./types";
 import opService from '../services/operations';
 
 export const getBalance = () => async (dispatch) => {
@@ -17,6 +17,16 @@ export const getLastOperations = () => async (dispatch) => {
             dispatch({
                 type: GET_LAST_OPERATIONS,
                 payload: {lastOperations: data}
+            })
+        })
+};
+
+export const getTypes = () => async (dispatch) => {
+    return await opService.getTypes()
+        .then((data) => {
+            dispatch({
+                type: GET_TYPES,
+                payload: {types: data}
             })
         })
 };
