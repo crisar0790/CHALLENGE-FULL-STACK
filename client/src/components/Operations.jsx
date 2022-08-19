@@ -69,13 +69,13 @@ const Operations = ({ lastOperations, allOperations }) => {
                         </THead>
                         <TBody>
                             {
-                                lastOperations.map((op, k) => (
+                                lastOperations.map((op, k) => ( 
                                     <Row key={k}>
-                                        <Column>{op.type}</Column>
-                                        <Column>{op.category}</Column>
+                                        <Column>{op.type.type}</Column>
+                                        <Column>{op.category.category}</Column>
                                         <Column>{op.concept}</Column>
                                         <Column>{op.amount}</Column>
-                                        <Column>{op.date}</Column>
+                                        <Column>{(op.date).split('T')[0].split('-').reverse().join('-')}</Column>
                                         <Column><Button>Edit</Button></Column>
                                         <Column><ButtonDelete>Delete</ButtonDelete></Column>
                                     </Row>
