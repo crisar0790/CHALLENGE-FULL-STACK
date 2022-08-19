@@ -1,6 +1,6 @@
 import { GET_BALANCE } from "../actions/types";
 
-const balance = JSON.parse(localStorage.getItem("balance"));
+const balance = {};
 
 const initialState = balance
     ? { balance }
@@ -12,7 +12,7 @@ export default function (state = initialState, action) {
         case GET_BALANCE:
             return {
                 ...state,
-                balance: payload.balance
+                balance: payload
             };
         default:
             return state;
