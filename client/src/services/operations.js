@@ -16,6 +16,19 @@ const getBalance = async () => {
     }
 };
 
+const getLastOperations = async () => {
+    try {
+        const userId = JSON.parse(localStorage.getItem("user")).dataValues.id
+        if (userId) {
+            return await axios(`${API_URL}/operations/?userId=${userId}&qNew=true`, { headers: authHeader() })
+                .then((response) => response.data)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export default {
-    getBalance
+    getBalance,
+    getLastOperations
 };
