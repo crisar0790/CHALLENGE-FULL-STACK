@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Balance from '../components/Balance';
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
@@ -17,18 +17,18 @@ const Container = styled.div`
 
 const Home = () => {
     const user = JSON.parse(localStorage.getItem("user"));
-    console.log(JSON.parse(localStorage.getItem("user")))
+
     return (
         <div>
             <Navbar />
             {
                 user ?
-                <Container>
-                    <Balance />
-                    <LastOpertions />
-                </Container>
-                :
-                <WithoutLogin />
+                    <Container>
+                        <Balance />
+                        <LastOpertions />
+                    </Container>
+                    :
+                    <WithoutLogin />
             }
             <Footer />
         </div>

@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { getBalance } from '../actions/operations';
 
 const Container = styled.div`
     width: 100%;
@@ -39,6 +41,11 @@ const Income = styled.div``;
 const Expense = styled.div``;
 
 const Balance = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getBalance());
+    },[dispatch])
     return (
         <Container>
             <Wrapper>
