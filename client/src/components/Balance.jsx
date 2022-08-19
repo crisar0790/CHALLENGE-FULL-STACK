@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getBalance } from '../actions/operations';
 
 const Container = styled.div`
@@ -40,20 +40,15 @@ const Income = styled.div``;
 
 const Expense = styled.div``;
 
-const Balance = () => {
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getBalance());
-    },[dispatch])
+const Balance = ({balance}) => {
     return (
         <Container>
             <Wrapper>
                 <Title>Balance</Title>
-                <Total>Total: $ 7700</Total>
+                <Total>Total: $ {balance?.total || 0}</Total>
                 <SubContainer>
-                    <Income>Income: $ 15000</Income>
-                    <Expense>Expense: $ 7300</Expense>
+                    <Income>Income: $ {balance?.income || 0}</Income>
+                    <Expense>Expense: $ {balance?.expense || 0}</Expense>
                 </SubContainer>
             </Wrapper>
         </Container>
