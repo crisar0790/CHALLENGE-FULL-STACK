@@ -21,8 +21,17 @@ const getLastOperations = async () => {
         const userId = JSON.parse(localStorage.getItem("user")).dataValues.id
         if (userId) {
             return await axios(`${API_URL}/operations/?userId=${userId}&qNew=true`, { headers: authHeader() })
-                .then((response) => localStorage.setItem("lastOperations", JSON.stringify(response.data)))
+                .then((response) => localStorage.setItem("lastOperations", JSON.stringify(response.data)));
         }
+    } catch (error) {
+        console.log(error)
+    }
+};
+
+const getTypes = async () => {
+    try {
+        return await axios(`${API_URL}/types/`)
+            .then((response) => localStorage.setItem("types", JSON.stringify(response.data)));
     } catch (error) {
         console.log(error)
     }
@@ -30,5 +39,6 @@ const getLastOperations = async () => {
 
 export default {
     getBalance,
-    getLastOperations
+    getLastOperations,
+    getTypes
 };
