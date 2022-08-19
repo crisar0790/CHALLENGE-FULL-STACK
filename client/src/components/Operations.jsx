@@ -42,7 +42,7 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
-const ButtonClose = styled.button`
+const ButtonDelete = styled.button`
     margin: 10px 5px;
     border: 1px solid red;
     padding: 15px 20px;
@@ -52,116 +52,74 @@ const ButtonClose = styled.button`
     cursor: pointer;
 `;
 
-const Operations = () => {
-  return (
-    <Container>
-        <Wrapper>
-            <Table>
-                <THead>
-                    <Row>
-                        <Column>Type</Column>
-                        <Column>Category</Column>
-                        <Column>Concept</Column>
-                        <Column>Amount</Column>
-                        <Column>Date</Column>
-                    </Row>
-                </THead>
-                <TBody>
-                    <Row>
-                        <Column>Income</Column>
-                        <Column>Salary</Column>
-                        <Column>Salary of July</Column>
-                        <Column>$ 8560</Column>
-                        <Column>29-07-2022</Column>
-                        <Column><Button>Edit</Button></Column>
-                        <Column><ButtonClose>Delete</ButtonClose></Column>
-                    </Row>
-                    <Row>
-                        <Column>Income</Column>
-                        <Column>Salary</Column>
-                        <Column>Salary of July</Column>
-                        <Column>$ 8560</Column>
-                        <Column>29-07-2022</Column>
-                        <Column><Button>Edit</Button></Column>
-                        <Column><ButtonClose>Delete</ButtonClose></Column>
-                    </Row>
-                    <Row>
-                        <Column>Income</Column>
-                        <Column>Salary</Column>
-                        <Column>Salary of July</Column>
-                        <Column>$ 8560</Column>
-                        <Column>29-07-2022</Column>
-                        <Column><Button>Edit</Button></Column>
-                        <Column><ButtonClose>Delete</ButtonClose></Column>
-                    </Row>
-                    <Row>
-                        <Column>Income</Column>
-                        <Column>Salary</Column>
-                        <Column>Salary of July</Column>
-                        <Column>$ 8560</Column>
-                        <Column>29-07-2022</Column>
-                        <Column><Button>Edit</Button></Column>
-                        <Column><ButtonClose>Delete</ButtonClose></Column>
-                    </Row>
-                    <Row>
-                        <Column>Income</Column>
-                        <Column>Salary</Column>
-                        <Column>Salary of July</Column>
-                        <Column>$ 8560</Column>
-                        <Column>29-07-2022</Column>
-                        <Column><Button>Edit</Button></Column>
-                        <Column><ButtonClose>Delete</ButtonClose></Column>
-                    </Row>
-                    <Row>
-                        <Column>Income</Column>
-                        <Column>Salary</Column>
-                        <Column>Salary of July</Column>
-                        <Column>$ 8560</Column>
-                        <Column>29-07-2022</Column>
-                        <Column><Button>Edit</Button></Column>
-                        <Column><ButtonClose>Delete</ButtonClose></Column>
-                    </Row>
-                    <Row>
-                        <Column>Income</Column>
-                        <Column>Salary</Column>
-                        <Column>Salary of July</Column>
-                        <Column>$ 8560</Column>
-                        <Column>29-07-2022</Column>
-                        <Column><Button>Edit</Button></Column>
-                        <Column><ButtonClose>Delete</ButtonClose></Column>
-                    </Row>
-                    <Row>
-                        <Column>Income</Column>
-                        <Column>Salary</Column>
-                        <Column>Salary of July</Column>
-                        <Column>$ 8560</Column>
-                        <Column>29-07-2022</Column>
-                        <Column><Button>Edit</Button></Column>
-                        <Column><ButtonClose>Delete</ButtonClose></Column>
-                    </Row>
-                    <Row>
-                        <Column>Income</Column>
-                        <Column>Salary</Column>
-                        <Column>Salary of July</Column>
-                        <Column>$ 8560</Column>
-                        <Column>29-07-2022</Column>
-                        <Column><Button>Edit</Button></Column>
-                        <Column><ButtonClose>Delete</ButtonClose></Column>
-                    </Row>
-                    <Row>
-                        <Column>Income</Column>
-                        <Column>Salary</Column>
-                        <Column>Salary of July</Column>
-                        <Column>$ 8560</Column>
-                        <Column>29-07-2022</Column>
-                        <Column><Button>Edit</Button></Column>
-                        <Column><ButtonClose>Delete</ButtonClose></Column>
-                    </Row>
-                </TBody>
-            </Table>
-        </Wrapper>
-    </Container>
-  )
+const Operations = ({ lastOperations, allOperations }) => {
+    if (lastOperations) {
+        return (
+            <Container>
+                <Wrapper>
+                    <Table>
+                        <THead>
+                            <Row>
+                                <Column>Type</Column>
+                                <Column>Category</Column>
+                                <Column>Concept</Column>
+                                <Column>Amount</Column>
+                                <Column>Date</Column>
+                            </Row>
+                        </THead>
+                        <TBody>
+                            {
+                                lastOperations.map((op, k) => (
+                                    <Row key={k}>
+                                        <Column>{op.type}</Column>
+                                        <Column>{op.category}</Column>
+                                        <Column>{op.concept}</Column>
+                                        <Column>{op.amount}</Column>
+                                        <Column>{op.date}</Column>
+                                        <Column><Button>Edit</Button></Column>
+                                        <Column><ButtonDelete>Delete</ButtonDelete></Column>
+                                    </Row>
+                                ))
+                            }
+                        </TBody>
+                    </Table>
+                </Wrapper>
+            </Container>
+        )
+    } else if (allOperations) {
+        return (
+            <Container>
+                <Wrapper>
+                    <Table>
+                        <THead>
+                            <Row>
+                                <Column>Type</Column>
+                                <Column>Category</Column>
+                                <Column>Concept</Column>
+                                <Column>Amount</Column>
+                                <Column>Date</Column>
+                            </Row>
+                        </THead>
+                        <TBody>
+                            {
+                                allOperations.map((op, k) => (
+                                    <Row key={k}>
+                                        <Column>{op.type}</Column>
+                                        <Column>{op.category}</Column>
+                                        <Column>{op.concept}</Column>
+                                        <Column>{op.amount}</Column>
+                                        <Column>{op.date}</Column>
+                                        <Column><Button>Edit</Button></Column>
+                                        <Column><ButtonDelete>Delete</ButtonDelete></Column>
+                                    </Row>
+                                ))
+                            }
+                        </TBody>
+                    </Table>
+                </Wrapper>
+            </Container>
+        )
+    }
 }
 
 export default Operations
