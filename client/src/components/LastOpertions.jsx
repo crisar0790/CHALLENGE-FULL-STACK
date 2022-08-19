@@ -36,15 +36,26 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
-const LastOpertions = () => {
+const LastOpertions = ({ lastOperations }) => {
+    if (!lastOperations) {
+        return (
+            <Container>
+                <Wrapper>
+                    <Title>You have not registered operations yet.</Title>
+                    <Button>Add operation</Button>
+                </Wrapper>
+            </Container>
+        )
+    }
     return (
         <Container>
             <Wrapper>
                 <Title>Last Operations</Title>
-                <Operations />
+                <Operations lastOperations={lastOperations} />
                 <Link to='/operations'>
-                    <Button onClick={() => window.scroll(0,0)}>Show more operations</Button>
+                    <Button onClick={() => window.scroll(0, 0)}>Show more operations</Button>
                 </Link>
+                <Button>Add operation</Button>
             </Wrapper>
         </Container>
     )
