@@ -8,7 +8,7 @@ const getBalance = async () => {
         const userId = JSON.parse(localStorage.getItem("user")).dataValues.id
         if (userId) {
             return await axios(`${API_URL}/operations/balance?userId=${userId}`, { headers: authHeader() })
-                .then((response) => response.data)
+                .then((response) => localStorage.setItem("balance", JSON.stringify(response.data)))
         }
 
     } catch (error) {
@@ -21,7 +21,7 @@ const getLastOperations = async () => {
         const userId = JSON.parse(localStorage.getItem("user")).dataValues.id
         if (userId) {
             return await axios(`${API_URL}/operations/?userId=${userId}&qNew=true`, { headers: authHeader() })
-                .then((response) => response.data)
+                .then((response) => localStorage.setItem("lastOperations", JSON.stringify(response.data)))
         }
     } catch (error) {
         console.log(error)
