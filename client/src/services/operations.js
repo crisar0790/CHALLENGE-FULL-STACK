@@ -8,7 +8,7 @@ const getBalance = async () => {
         const userId = JSON.parse(localStorage.getItem("user")).dataValues.id
         if (userId) {
             return await axios(`${API_URL}/operations/balance?userId=${userId}`, { headers: authHeader() })
-                .then((response) => console.log(response.data))
+                .then((response) => response.data)
         }
 
     } catch (error) {

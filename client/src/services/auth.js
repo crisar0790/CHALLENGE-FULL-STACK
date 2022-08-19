@@ -11,7 +11,6 @@ const register = async (firstName, lastName, email, password) => {
 };
 
 const login = async (email, password) => {
-    console.log(`${API_URL}/auth/login`)
     return await axios
         .post(`${API_URL}/auth/login`, {
             email,
