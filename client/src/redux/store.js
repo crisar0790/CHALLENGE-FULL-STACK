@@ -12,6 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import auth from '../reducers/auth';
 import message from '../reducers/message';
+import operations from '../reducers/operations';
 
 const persistConfig = {
     key: 'root',
@@ -19,7 +20,7 @@ const persistConfig = {
     storage,
 };
 
-const rootReducer = combineReducers({ auth, message });
+const rootReducer = combineReducers({ auth, message, operations });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
