@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { getBalance } from '../actions/operations';
 
 const Container = styled.div`
     width: 100%;
