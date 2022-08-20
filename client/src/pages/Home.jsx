@@ -20,15 +20,15 @@ const Container = styled.div`
 const Home = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const dispatch = useDispatch();
-    const balance = user && JSON.parse(localStorage.getItem("balance"));
-    const lastOperations = user && JSON.parse(localStorage.getItem("lastOperations"));
+    const {balance} = useSelector(state => state.operations);
+    const {lastOperations} = useSelector(state => state.operations);
 
     useEffect(() => {
         if (user) {
             dispatch(getBalance());
             dispatch(getLastOperations());
         }
-    },[user, dispatch]);
+    },[dispatch]);
 
     return (
         <div>

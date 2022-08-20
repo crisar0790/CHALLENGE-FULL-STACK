@@ -5,8 +5,8 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Operations from '../components/Operations';
 import Balance from '../components/Balance';
-import { useDispatch } from 'react-redux';
-import { getTypes, getCategories } from '../actions/operations';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTypes, getCategories, getOperations } from '../actions/operations';
 import { useEffect } from 'react';
 
 const Container = styled.div`
@@ -22,13 +22,16 @@ const Container = styled.div`
 const OperationsList = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const dispatch = useDispatch();
-  const balance = user && JSON.parse(localStorage.getItem("balance"));
-  const types = user && JSON.parse(localStorage.getItem("types"));
-  const categories = user && JSON.parse(localStorage.getItem("categories"));
+  const { balance } = useSelector(state => state.operations);
+  const { types } = useSelector(state => state.operations);
+  const { categories } = useSelector(state => state.operations);
+  const { allOperations } = useSelector(state => state.operations);
+  console.log(allOperations)
 
   useEffect(() => {
     dispatch(getTypes());
     dispatch(getCategories());
+    dispatch(getOperations());
   }, [dispatch]);
   return (
     <div>
@@ -36,7 +39,7 @@ const OperationsList = () => {
       <Container>
         <Balance balance={balance} />
         <Filters types={types} categories={categories} />
-        <Operations />
+        <Operations allOperations={allOperations} />
       </Container>
       <Footer />
     </div>

@@ -1,4 +1,4 @@
-import { GET_BALANCE, GET_CATEGORIES, GET_LAST_OPERATIONS, GET_TYPES } from "./types";
+import { GET_BALANCE, GET_CATEGORIES, GET_LAST_OPERATIONS, GET_TYPES, GET_OPERATIONS } from "./types";
 import opService from '../services/operations';
 
 export const getBalance = () => async (dispatch) => {
@@ -6,7 +6,7 @@ export const getBalance = () => async (dispatch) => {
         .then((data) => {
             dispatch({
                 type: GET_BALANCE,
-                payload: {balance: data}
+                payload: { balance: data }
             })
         })
 };
@@ -16,7 +16,17 @@ export const getLastOperations = () => async (dispatch) => {
         .then((data) => {
             dispatch({
                 type: GET_LAST_OPERATIONS,
-                payload: {lastOperations: data}
+                payload: { lastOperations: data }
+            })
+        })
+};
+
+export const getOperations = (type, category, order= 'des') => async (dispatch) => {
+    return await opService.getOperations(type, category, order)
+        .then((data) => {
+            dispatch({
+                type: GET_OPERATIONS,
+                payload: { operations: data }
             })
         })
 };
@@ -26,7 +36,7 @@ export const getTypes = () => async (dispatch) => {
         .then((data) => {
             dispatch({
                 type: GET_TYPES,
-                payload: {types: data}
+                payload: { types: data }
             })
         })
 };
@@ -36,7 +46,7 @@ export const getCategories = () => async (dispatch) => {
         .then((data) => {
             dispatch({
                 type: GET_CATEGORIES,
-                payload: {categories: data}
+                payload: { categories: data }
             })
         })
 };
