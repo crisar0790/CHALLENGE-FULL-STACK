@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar';
 import Operations from '../components/Operations';
 import Balance from '../components/Balance';
 import { useDispatch } from 'react-redux';
-import { getTypes } from '../actions/operations';
+import { getTypes, getCategories } from '../actions/operations';
 import { useEffect } from 'react';
 
 const Container = styled.div`
@@ -24,16 +24,18 @@ const OperationsList = () => {
   const dispatch = useDispatch();
   const balance = user && JSON.parse(localStorage.getItem("balance"));
   const types = user && JSON.parse(localStorage.getItem("types"));
+  const categories = user && JSON.parse(localStorage.getItem("categories"));
 
   useEffect(() => {
     dispatch(getTypes());
+    dispatch(getCategories());
   }, [dispatch]);
   return (
     <div>
       <Navbar />
       <Container>
         <Balance balance={balance} />
-        <Filters types={types} />
+        <Filters types={types} categories={categories} />
         <Operations />
       </Container>
       <Footer />

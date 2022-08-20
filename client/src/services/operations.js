@@ -35,10 +35,20 @@ const getTypes = async () => {
     } catch (error) {
         console.log(error)
     }
-}
+};
+
+const getCategories = async () => {
+    try {
+        return await axios(`${API_URL}/categories/`)
+            .then((response) => localStorage.setItem("categories", JSON.stringify(response.data)));
+    } catch (error) {
+        console.log(error)
+    }
+};
 
 export default {
     getBalance,
     getLastOperations,
-    getTypes
+    getTypes,
+    getCategories
 };

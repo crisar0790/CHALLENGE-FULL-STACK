@@ -1,9 +1,10 @@
-import { GET_BALANCE, GET_LAST_OPERATIONS, GET_TYPES } from "../actions/types";
+import { GET_BALANCE, GET_CATEGORIES, GET_LAST_OPERATIONS, GET_TYPES } from "../actions/types";
 
 const initialState = {
     balance: {},
     lastOperations: [],
-    types: []
+    types: [],
+    categories: []
 };
 
 export default function (state = initialState, action) {
@@ -23,6 +24,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 types: payload
+            };
+        case GET_CATEGORIES:
+            return {
+                ...state,
+                categories: payload
             }
         default:
             return state;
