@@ -37,7 +37,7 @@ const Button = styled.button`
 `;
 
 const LastOpertions = ({ lastOperations }) => {
-    if (!lastOperations) {
+    if (!lastOperations.length) {
         return (
             <Container>
                 <Wrapper>
