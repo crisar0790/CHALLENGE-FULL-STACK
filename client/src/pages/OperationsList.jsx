@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
 import Filters from '../components/Filters';
 import Footer from '../components/Footer';
@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar';
 import Operations from '../components/Operations';
 import Balance from '../components/Balance';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTypes, getCategories, getOperations } from '../actions/operations';
+import { getTypes, getCategories, getOperations, deleteOperation } from '../actions/operations';
 import { useEffect } from 'react';
 
 const Container = styled.div`
@@ -26,21 +26,54 @@ const OperationsList = () => {
   const { types } = useSelector(state => state.operations);
   const { categories } = useSelector(state => state.operations);
   const { operations } = useSelector(state => state.operations);
+  const [type, setType] = useState('');
+  const [category, setCategory] = useState('');
+  const [order, setOrder] = useState('des');
 
   useEffect(() => {
     if (user) {
       dispatch(getTypes());
       dispatch(getCategories());
-      dispatch(getOperations('des'));
+      dispatch(getOperations(type, category, order));
     }
-  }, [dispatch]);
+  }, [dispatch, type, category, order]);
+
+  const handleGetOperationsByOrder = (e) => {
+    setOrder(e.target.value);
+    dispatch(getOperations(type, category, e.target.value));
+  };
+
+  const handleGetOperationsByType = (e) => {
+    setType(e.target.value);
+    dispatch(getOperations(e.target.value, category, order));
+  };
+
+  const handleGetOperationsByCategory = (e) => {
+    setCategory(e.target.value);
+    dispatch(getOperations(type, e.target.value, order));
+  };
+
+  const handleDelete = (id) => {
+    dispatch(deleteOperation(id));
+    dispatch(getOperations(type, category, order));
+  };
+
+  const handleEdit = (id) => {
+    dispatch()
+  };
+
   return (
     <div>
       <Navbar />
       <Container>
         <Balance balance={balance} />
-        <Filters types={types} categories={categories} />
-        <Operations allOperations={operations} />
+        <Filters
+          types={types}
+          categories={categories}
+          handleGetOperationsByOrder={handleGetOperationsByOrder}
+          handleGetOperationsByType={handleGetOperationsByType}
+          handleGetOperationsByCategory={handleGetOperationsByCategory} />
+        <Operations allOperations={operations} handleDelete={handleDelete} handleEdit={handleEdit} />
       </Container>
       <Footer />
     </div>
