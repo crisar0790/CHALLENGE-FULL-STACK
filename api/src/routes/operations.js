@@ -158,8 +158,7 @@ router.delete('/delete/:id', verifyToken, async (req, res) => {
 //------------------------ GET ------------------------
 
 router.get('/', verifyToken, async (req, res) => {
-    const { type, category, order } = req.body;
-    const { userId, qNew } = req.query;
+    const { userId, qNew, type, category, order } = req.query;
     if (!userId) return res.status(400).json('Missing userId');
     const oneType = type ? await Type.findOne({ where: { type: type } }) : undefined;
     const oneCategory = category ? await Category.findOne({ where: { category: category } }) : undefined;
@@ -302,7 +301,7 @@ router.get('/', verifyToken, async (req, res) => {
             await ops.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
             operations = ops;
         }
-        if (operations.length) {
+        if (operations) {
             res.status(200).json(operations);
         } else {
             res.status(404).json('No operations');
