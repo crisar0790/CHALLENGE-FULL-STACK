@@ -27,7 +27,7 @@ const getLastOperations = async () => {
     }
 };
 
-async function getOperations (type, category, order) {
+async function getOperations(type, category, order) {
     try {
         const userId = JSON.parse(localStorage.getItem("user")).dataValues.id
         if (userId && type === '' && category === '' && order) {
@@ -51,12 +51,12 @@ async function getOperations (type, category, order) {
         } else if (userId && type && category && order) {
             return await axios(`${API_URL}/operations/?userId=${userId}&type=${type}&category=${category}&order=${order}`, { headers: authHeader() })
                 .then((response) => response.data);
-        } 
+        }
     } catch (error) {
         console.log(error)
     }
 };
-    
+
 const getTypes = async () => {
     try {
         return await axios(`${API_URL}/types/`)
@@ -75,10 +75,21 @@ const getCategories = async () => {
     }
 };
 
+async function deleteOperation(id) {
+    try {
+        console.log(id)
+        return await axios.delete(`${API_URL}/operations/delete/${id}`, { headers: authHeader() })
+            .then((response) => response.data);
+    } catch (error) {
+        console.log(error)
+    }
+};
+
 export default {
     getBalance,
     getLastOperations,
     getOperations,
     getTypes,
-    getCategories
+    getCategories,
+    deleteOperation
 };
