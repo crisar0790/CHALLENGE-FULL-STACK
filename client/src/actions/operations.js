@@ -1,4 +1,4 @@
-import { GET_BALANCE, GET_CATEGORIES, GET_LAST_OPERATIONS, GET_TYPES, GET_OPERATIONS } from "./types";
+import { GET_BALANCE, GET_CATEGORIES, GET_LAST_OPERATIONS, GET_TYPES, GET_OPERATIONS, DELETE_OPERATION } from "./types";
 import opService from '../services/operations';
 
 export const getBalance = () => async (dispatch) => {
@@ -21,13 +21,13 @@ export const getLastOperations = () => async (dispatch) => {
         })
 };
 
-export const getOperations = () => async (dispatch, {type = '', category = '', order='des'}) => {
+export const getOperations = ( type='', category='', order='des') => async (dispatch) => {
     return await opService.getOperations(type, category, order)
-        .then((data) => {   
+        .then((data) => {
             dispatch({
                 type: GET_OPERATIONS,
                 payload: { operations: data }
-            })  
+            })
         })
 };
 
@@ -47,6 +47,16 @@ export const getCategories = () => async (dispatch) => {
             dispatch({
                 type: GET_CATEGORIES,
                 payload: { categories: data }
+            })
+        })
+};
+
+export const deleteOperation = (id) => async (dispatch) => {
+    console.log(id)
+    return await opService.deleteOperation(id)
+        .then((data) => {
+            dispatch({
+                type: DELETE_OPERATION
             })
         })
 };
