@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import AddOperation from './AddOperation';
 import Operations from './Operations';
 
 const Container = styled.div`
@@ -37,12 +38,13 @@ const Button = styled.button`
 `;
 
 const LastOpertions = ({ lastOperations, handleDelete, handleEdit }) => {
+    const [showAdd, setShowAdd] = useState(false);
     if (!lastOperations.length) {
         return (
             <Container>
                 <Wrapper>
                     <Title>You have not registered operations yet.</Title>
-                    <Button>Add operation</Button>
+                    <Button onClick={() => setShowAdd(true)} >Add operation</Button>
                 </Wrapper>
             </Container>
         )
@@ -55,7 +57,8 @@ const LastOpertions = ({ lastOperations, handleDelete, handleEdit }) => {
                 <Link to='/operations'>
                     <Button onClick={() => window.scroll(0, 0)}>Show more operations</Button>
                 </Link>
-                <Button>Add operation</Button>
+                <Button onClick={() => setShowAdd(true)} >Add operation</Button>
+                <AddOperation showAdd={showAdd} onClose={() => setShowAdd(false)} setShowAdd={setShowAdd} />
             </Wrapper>
         </Container>
     )
