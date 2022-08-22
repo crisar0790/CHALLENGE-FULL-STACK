@@ -53,7 +53,7 @@ const ButtonDelete = styled.button`
 `;
 
 const Operations = ({ lastOperations, allOperations }) => {
-    if (lastOperations.length) {
+    if (lastOperations) {
         return (
             <Container>
                 <Wrapper>
@@ -86,7 +86,7 @@ const Operations = ({ lastOperations, allOperations }) => {
                 </Wrapper>
             </Container>
         )
-    } else if (allOperations.length) {
+    } else if (allOperations) {
         return (
             <Container>
                 <Wrapper>
@@ -102,13 +102,13 @@ const Operations = ({ lastOperations, allOperations }) => {
                         </THead>
                         <TBody>
                             {
-                                allOperations.map((op, k) => (
+                                allOperations?.map((op, k) => (
                                     <Row key={k}>
                                         <Column>{op.type.type}</Column>
                                         <Column>{op.category.category}</Column>
                                         <Column>{op.concept}</Column>
                                         <Column>{op.amount}</Column>
-                                        <Column>{op.date}</Column>
+                                        <Column>{(op.date).split('T')[0].split('-').reverse().join('-')}</Column>
                                         <Column><Button>Edit</Button></Column>
                                         <Column><ButtonDelete>Delete</ButtonDelete></Column>
                                     </Row>
