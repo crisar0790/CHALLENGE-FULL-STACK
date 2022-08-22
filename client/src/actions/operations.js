@@ -21,13 +21,13 @@ export const getLastOperations = () => async (dispatch) => {
         })
 };
 
-export const getOperations = (type, category, order= 'des') => async (dispatch) => {
+export const getOperations = () => async (dispatch, {type = '', category = '', order='des'}) => {
     return await opService.getOperations(type, category, order)
-        .then((data) => {
+        .then((data) => {   
             dispatch({
                 type: GET_OPERATIONS,
                 payload: { operations: data }
-            })
+            })  
         })
 };
 
