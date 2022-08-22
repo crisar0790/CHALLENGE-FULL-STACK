@@ -64,7 +64,7 @@ const ButtonDelete = styled.button`
     }
 `;
 
-const Operations = ({ lastOperations, allOperations }) => {
+const Operations = ({ lastOperations, allOperations, handleDelete, handleEdit }) => {
     if (lastOperations) {
         return (
             <Container>
@@ -88,8 +88,8 @@ const Operations = ({ lastOperations, allOperations }) => {
                                         <Column>{op.concept}</Column>
                                         <Column>{op.amount}</Column>
                                         <Column>{(op.date).split('T')[0].split('-').reverse().join('-')}</Column>
-                                        <Column><Button>Edit</Button></Column>
-                                        <Column><ButtonDelete>Delete</ButtonDelete></Column>
+                                        <Column><Button onClick={() => handleEdit(op.id)} >Edit</Button></Column>
+                                        <Column><ButtonDelete onClick={() => handleDelete(op.id)} >Delete</ButtonDelete></Column>
                                     </Row>
                                 ))
                             }
@@ -121,8 +121,8 @@ const Operations = ({ lastOperations, allOperations }) => {
                                         <Column>{op.concept}</Column>
                                         <Column>{op.amount}</Column>
                                         <Column>{(op.date).split('T')[0].split('-').reverse().join('-')}</Column>
-                                        <Column><Button>Edit</Button></Column>
-                                        <Column><ButtonDelete>Delete</ButtonDelete></Column>
+                                        <Column><Button onClick={() => handleEdit(op.id)} >Edit</Button></Column>
+                                        <Column><ButtonDelete onClick={() => handleDelete(op.id)} >Delete</ButtonDelete></Column>
                                     </Row>
                                 ))
                             }
