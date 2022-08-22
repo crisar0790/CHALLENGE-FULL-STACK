@@ -8,6 +8,7 @@ import Balance from '../components/Balance';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTypes, getCategories, getOperations, deleteOperation } from '../actions/operations';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
     width: 100%;
@@ -22,6 +23,7 @@ const Container = styled.div`
 const OperationsList = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { balance } = useSelector(state => state.operations);
   const { types } = useSelector(state => state.operations);
   const { categories } = useSelector(state => state.operations);
@@ -62,6 +64,9 @@ const OperationsList = () => {
     dispatch()
   };
 
+  if (!user) {
+    navigate('/');
+  }
   return (
     <div>
       <Navbar />
