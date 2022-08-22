@@ -6,7 +6,7 @@ import WithoutLogin from '../components/WithoutLogin';
 import styled from 'styled-components';
 import LastOpertions from '../components/LastOpertions';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBalance, getLastOperations } from '../actions/operations';
+import { deleteOperation, getBalance, getLastOperations } from '../actions/operations';
 
 const Container = styled.div`
     width: 100%;
@@ -23,6 +23,15 @@ const Home = () => {
     const {balance} = useSelector(state => state.operations);
     const {lastOperations} = useSelector(state => state.operations);
 
+    const handleDelete = (id) => {
+        dispatch(deleteOperation(id));
+        dispatch(getLastOperations());
+    };
+
+    const handleEdit = (id) => {
+        dispatch()
+    };
+
     useEffect(() => {
         if (user) {
             dispatch(getBalance());
@@ -37,7 +46,7 @@ const Home = () => {
                 user ?
                     <Container>
                         <Balance balance={balance} />
-                        <LastOpertions lastOperations={lastOperations} />
+                        <LastOpertions lastOperations={lastOperations} handleDelete={handleDelete} handleEdit={handleEdit} />
                     </Container>
                     :
                     <WithoutLogin />

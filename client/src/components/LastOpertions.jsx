@@ -36,7 +36,7 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
-const LastOpertions = ({ lastOperations }) => {
+const LastOpertions = ({ lastOperations, handleDelete, handleEdit }) => {
     if (!lastOperations.length) {
         return (
             <Container>
@@ -51,7 +51,7 @@ const LastOpertions = ({ lastOperations }) => {
         <Container>
             <Wrapper>
                 <Title>Last Operations</Title>
-                <Operations lastOperations={lastOperations} />
+                <Operations lastOperations={lastOperations} handleDelete={handleDelete} handleEdit={handleEdit} />
                 <Link to='/operations'>
                     <Button onClick={() => window.scroll(0, 0)}>Show more operations</Button>
                 </Link>
