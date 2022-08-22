@@ -42,36 +42,36 @@ const FilterSelect = styled.select`
 
 const FilterOption = styled.option``;
 
-const Filters = ({types, categories}) => {
+const Filters = ({types, categories, handleGetOperationsByOrder,  handleGetOperationsByType, handleGetOperationsByCategory}) => {
     if (types && categories) {
         return (
             <Container>
                 <Wrapper>
                         <Order>
                             <OrderDate>Order by date</OrderDate>
-                            <OrderDateSelect>
-                                <OrderDateOption>Recent operations</OrderDateOption>
-                                <OrderDateOption>Older operations</OrderDateOption>
+                            <OrderDateSelect onChange={(e) => handleGetOperationsByOrder(e)} >
+                                <OrderDateOption value='des' >Recent operations</OrderDateOption>
+                                <OrderDateOption value='asc' >Older operations</OrderDateOption>
                             </OrderDateSelect>
                         </Order>
                         <Filter>
                             <FilterTitle>Type</FilterTitle>
-                            <FilterSelect>
-                                <FilterOption>All types</FilterOption>
+                            <FilterSelect onChange={(e) => handleGetOperationsByType(e)} >
+                                <FilterOption value='' >All types</FilterOption>
                                 {
                                     types?.map((t, k) => (
-                                        <FilterOption key={k} >{t.type}</FilterOption>
+                                        <FilterOption key={k} value={t.type} >{t.type}</FilterOption>
                                     ))
                                 }
                             </FilterSelect>
                         </Filter>
                         <Filter>
                             <FilterTitle>Category</FilterTitle>
-                            <FilterSelect>
-                                <FilterOption>All categories</FilterOption>
+                            <FilterSelect  onChange={(e) => handleGetOperationsByCategory(e)}>
+                                <FilterOption value='' >All categories</FilterOption>
                                 {
                                     categories?.map((c, k) => (
-                                        <FilterOption key={k} >{c.category}</FilterOption>
+                                        <FilterOption key={k} value={c.category} >{c.category}</FilterOption>
                                     ))
                                 }
                             </FilterSelect>
