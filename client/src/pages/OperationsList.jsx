@@ -25,13 +25,14 @@ const OperationsList = () => {
   const { balance } = useSelector(state => state.operations);
   const { types } = useSelector(state => state.operations);
   const { categories } = useSelector(state => state.operations);
-  const { allOperations } = useSelector(state => state.operations);
-  console.log(allOperations)
+  const { operations } = useSelector(state => state.operations);
 
   useEffect(() => {
-    dispatch(getTypes());
-    dispatch(getCategories());
-    dispatch(getOperations());
+    if (user) {
+      dispatch(getTypes());
+      dispatch(getCategories());
+      dispatch(getOperations('des'));
+    }
   }, [dispatch]);
   return (
     <div>
@@ -39,7 +40,7 @@ const OperationsList = () => {
       <Container>
         <Balance balance={balance} />
         <Filters types={types} categories={categories} />
-        <Operations allOperations={allOperations} />
+        <Operations allOperations={operations} />
       </Container>
       <Footer />
     </div>
