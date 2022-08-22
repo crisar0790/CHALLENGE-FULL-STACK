@@ -40,6 +40,12 @@ const Button = styled.button`
     color: teal;
     font-weight: 700;
     cursor: pointer;
+    &:hover {
+        border: 1px solid white;
+        padding: 15px 20px;
+        background-color: teal;
+        color: white;
+    }
 `;
 
 const ButtonDelete = styled.button`
@@ -50,6 +56,12 @@ const ButtonDelete = styled.button`
     color: red;
     font-weight: 700;
     cursor: pointer;
+    &:hover {
+        border: 1px solid white;
+        padding: 15px 20px;
+        background-color: red;
+        color: white;
+    }
 `;
 
 const Operations = ({ lastOperations, allOperations }) => {
