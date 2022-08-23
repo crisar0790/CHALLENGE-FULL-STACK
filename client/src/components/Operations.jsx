@@ -78,6 +78,8 @@ const Operations = ({
     handleEdit,
     showEdit,
     setShowEdit,
+    opId,
+    setOpId,
     conceptEdit,
     setConceptEdit,
     amountEdit,
@@ -117,6 +119,7 @@ const Operations = ({
                                                 setAmountEdit(op.amount);
                                                 setDateEdit(op.date);
                                                 setCategoryEdit(op.category.category);
+                                                setOpId(op.id)
                                                 setShowEdit(true)
                                             }} >Edit</Button></Column>
                                         <Column><ButtonDelete onClick={() => handleDelete(op.id)} >Delete</ButtonDelete></Column>
@@ -167,6 +170,7 @@ const Operations = ({
                                         <Column>{(op.date).split('T')[0].split('-').reverse().join('-')}</Column>
                                         <Column><Button
                                             onClick={() => {
+                                                setOpId(op.id)
                                                 setConceptEdit(op.concept);
                                                 setAmountEdit(op.amount);
                                                 setDateEdit(op.date);
