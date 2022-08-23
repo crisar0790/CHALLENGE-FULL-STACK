@@ -53,7 +53,16 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
-const Filters = ({ types, categories, handleGetOperationsByOrder, handleGetOperationsByType, handleGetOperationsByCategory }) => {
+const Filters = ({ types, categories,
+    handleGetOperationsByOrder,
+    handleGetOperationsByType,
+    handleGetOperationsByCategory,
+    handleAdd,
+    setConcept,
+    setAmount,
+    setDate,
+    setTypeAdd,
+    setCategoryAdd }) => {
     const [showAdd, setShowAdd] = useState(false);
     if (types && categories) {
         return (
@@ -89,7 +98,16 @@ const Filters = ({ types, categories, handleGetOperationsByOrder, handleGetOpera
                         </FilterSelect>
                     </Filter>
                     <Button onClick={() => setShowAdd(true)} >Add operation</Button>
-                    <AddOperation showAdd={showAdd} onClose={() => setShowAdd(false)} setShowAdd={setShowAdd} />
+                    <AddOperation
+                        showAdd={showAdd}
+                        onClose={() => setShowAdd(false)}
+                        setShowAdd={setShowAdd}
+                        handleAdd={handleAdd}
+                        setConcept={setConcept}
+                        setAmount={setAmount}
+                        setDate={setDate}
+                        setTypeAdd={setTypeAdd}
+                        setCategoryAdd={setCategoryAdd} />
                 </Wrapper>
             </Container>
         )
