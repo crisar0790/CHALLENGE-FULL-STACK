@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
 import { GrClose } from 'react-icons/gr';
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories, getTypes } from '../actions/operations';
+import { createOperation, getCategories, getTypes } from '../actions/operations';
 
 const Container = styled.div`
     min-height: 100vh;
@@ -94,19 +94,10 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
-const AddOperation = ({showAdd, onClose, setShowAdd}) => {
+const AddOperation = ({ showAdd, onClose, setShowAdd, handleAdd, setConcept, setAmount, setDate, setTypeAdd, setCategoryAdd }) => {
     const { types } = useSelector(state => state.operations);
     const { categories } = useSelector(state => state.operations);
-    const [concept, setConcept] = useState('');
-    const [amount, setAmount] = useState(0);
-    const [date, setDate] = useState('');
-    const [type, setType] = useState('');
-    const [category, setCategory] = useState('');
     const dispatch = useDispatch();
-
-    const handleAdd = () => {
-
-    };
 
     useEffect(() => {
         dispatch(getTypes());
@@ -128,7 +119,8 @@ const AddOperation = ({showAdd, onClose, setShowAdd}) => {
                     <SubContainer>
                         <Select>
                             <Label>Type</Label>
-                            <Type onChange={(e) => setType(e.target.value)} >
+                            <Type onChange={(e) => setTypeAdd(e.target.value)} >
+                                <Option value='' enable='disabled' >Choose one</Option>
                                 {
                                     types?.map((t, k) => (
                                         <Option key={k} value={t.type} >{t.type}</Option>
@@ -138,7 +130,8 @@ const AddOperation = ({showAdd, onClose, setShowAdd}) => {
                         </Select>
                         <Select>
                             <Label>Category</Label>
-                            <Category onChange={(e) => setCategory(e.target.value)}>
+                            <Category onChange={(e) => setCategoryAdd(e.target.value)}>
+                                <Option value='' enable='disabled' >Choose one</Option>
                                 {
                                     categories?.map((c, k) => (
                                         <Option key={k} value={c.category} >{c.category}</Option>
@@ -148,7 +141,7 @@ const AddOperation = ({showAdd, onClose, setShowAdd}) => {
                         </Select>
                     </SubContainer>
 
-                    <Button onClick={() => setShowAdd(false)}>CREATE</Button>
+                    <Button onClick={(e) => { handleAdd(e); setShowAdd(false) }}>CREATE</Button>
                 </Form>
             </Wrapper>
         </Container>
