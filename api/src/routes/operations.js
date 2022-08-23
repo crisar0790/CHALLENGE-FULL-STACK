@@ -181,7 +181,7 @@ router.get('/', verifyToken, async (req, res) => {
             await ops.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
             operations = await ops.slice(0, 10);
         } else if (type && !category && order === 'asc') {
-            operations = await Operation.findAll({
+            let ops = await Operation.findAll({
                 where: { userId: userId, typeId: oneType.id },
                 include: [
                     {
@@ -194,6 +194,8 @@ router.get('/', verifyToken, async (req, res) => {
                     }
                 ]
             });
+            await ops.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+            operations = ops;
         } else if (type && !category && order === 'des') {
             let ops = await Operation.findAll({
                 where: { userId: userId, typeId: oneType.id },
@@ -211,7 +213,7 @@ router.get('/', verifyToken, async (req, res) => {
             await ops.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
             operations = ops;
         } else if (!type && category && order === 'asc') {
-            operations = await Operation.findAll({
+            let ops = await Operation.findAll({
                 where: { userId: userId, categoryId: oneCategory.id },
                 include: [
                     {
@@ -224,6 +226,8 @@ router.get('/', verifyToken, async (req, res) => {
                     }
                 ]
             });
+            await ops.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+            operations = ops;
         } else if (!type && category && order === 'des') {
             let ops = await Operation.findAll({
                 where: { userId: userId, categoryId: oneCategory.id },
@@ -241,7 +245,7 @@ router.get('/', verifyToken, async (req, res) => {
             await ops.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
             operations = ops;
         } else if (type && category && order === 'asc') {
-            operations = await Operation.findAll({
+            let ops = await Operation.findAll({
                 where: { userId: userId, typeId: oneType.id, categoryId: oneCategory.id },
                 include: [
                     {
@@ -254,6 +258,8 @@ router.get('/', verifyToken, async (req, res) => {
                     }
                 ]
             });
+            await ops.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+            operations = ops;
         } else if (type && category && order === 'des') {
             let ops = await Operation.findAll({
                 where: { userId: userId, typeId: oneType.id, categoryId: oneCategory.id },
@@ -271,7 +277,7 @@ router.get('/', verifyToken, async (req, res) => {
             await ops.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
             operations = ops;
         } else if (!type && !category && order === 'asc') {
-            operations = await Operation.findAll({
+            let ops = await Operation.findAll({
                 where: { userId: userId },
                 include: [
                     {
@@ -284,6 +290,8 @@ router.get('/', verifyToken, async (req, res) => {
                     }
                 ]
             });
+            await ops.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+            operations = ops;
         } else if (!type && !category && order === 'des') {
             let ops = await Operation.findAll({
                 where: { userId: userId },
