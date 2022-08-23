@@ -51,6 +51,7 @@ const LastOpertions = ({
     handleEdit,
     showEdit,
     setShowEdit,
+    setOpId,
     conceptEdit,
     setConceptEdit,
     amountEdit,
@@ -90,6 +91,7 @@ const LastOpertions = ({
                 handleEdit={handleEdit}
                 showEdit={showEdit}
                 setShowEdit={setShowEdit}
+                setOpId={setOpId}
                 conceptEdit={conceptEdit}
                 setConceptEdit={setConceptEdit}
                 amountEdit={amountEdit}
