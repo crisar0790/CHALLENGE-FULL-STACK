@@ -4,17 +4,21 @@ import AddOperation from './AddOperation';
 
 const Container = styled.div`
     width: 100%;
+    margin: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
 `;
 
 const Wrapper = styled.div`
-    padding: 20px;
+    padding: 10px;
     box-sizing: border-box;
+    border-top: 1px solid teal;
+    border-bottom: 1px solid teal;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow-x: auto;
 `;
 
 const Order = styled.div`
