@@ -77,7 +77,6 @@ const getCategories = async () => {
 
 async function deleteOperation(id) {
     try {
-        console.log(id)
         return await axios.delete(`${API_URL}/operations/delete/${id}`, { headers: authHeader() })
             .then((response) => response.data);
     } catch (error) {
@@ -85,11 +84,26 @@ async function deleteOperation(id) {
     }
 };
 
+const  createOperation = async (concept, amount, date, type, category) => {
+    try {
+        const userId = JSON.parse(localStorage.getItem("user")).dataValues.id
+        const headers = authHeader()
+        console.log(headers.token)
+        if (userId) {
+            return await axios.post(`${API_URL}/operations/create?userId=${userId}`, {concept, amount, date, type, category}, { headers: authHeader() })
+                .then((response) => response.data);
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export default {
     getBalance,
     getLastOperations,
     getOperations,
     getTypes,
     getCategories,
-    deleteOperation
+    deleteOperation,
+    createOperation
 };
