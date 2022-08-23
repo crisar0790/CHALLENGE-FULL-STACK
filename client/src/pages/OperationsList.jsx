@@ -45,7 +45,7 @@ const OperationsList = () => {
       dispatch(getOperations(type, category, order));
       dispatch(getBalance());
     }
-  }, [dispatch, createOperation, deleteOperation]);
+  }, [dispatch]);
 
   const handleGetOperationsByOrder = (e) => {
     setOrder(e.target.value);
@@ -64,7 +64,10 @@ const OperationsList = () => {
 
   const handleDelete = (id) => {
     dispatch(deleteOperation(id));
-    dispatch(getOperations(type, category, order));
+    setTimeout(function(){
+      dispatch(getOperations(type, category, order));
+      dispatch(getBalance());
+    }, 1000);
   };
 
   const handleEdit = (id) => {
@@ -74,7 +77,10 @@ const OperationsList = () => {
   const handleAdd = (e) => {
     e.preventDefault();
     dispatch(createOperation(concept, amount, date, typeAdd, categoryAdd));
-    dispatch(getOperations(type, category, order));
+    setTimeout(function(){
+      dispatch(getOperations(type, category, order));
+      dispatch(getBalance());
+    }, 1000);
   };
 
 

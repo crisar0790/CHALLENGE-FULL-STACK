@@ -31,7 +31,10 @@ const Home = () => {
 
     const handleDelete = (id) => {
         dispatch(deleteOperation(id));
-        dispatch(getLastOperations());
+        setTimeout(function(){
+            dispatch(getBalance());
+            dispatch(getLastOperations());
+        }, 1000);
     };
 
     const handleEdit = (id) => {
@@ -48,7 +51,10 @@ const Home = () => {
     const handleAdd = (e) => {
         e.preventDefault();
         dispatch(createOperation(concept, amount, date, typeAdd, categoryAdd));
-        dispatch(getLastOperations());
+        setTimeout(function(){
+            dispatch(getBalance());
+            dispatch(getLastOperations());
+        }, 1000);
     };
 
     return (
