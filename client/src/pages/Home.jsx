@@ -6,7 +6,7 @@ import WithoutLogin from '../components/WithoutLogin';
 import styled from 'styled-components';
 import LastOpertions from '../components/LastOpertions';
 import { useDispatch, useSelector } from 'react-redux';
-import { createOperation, deleteOperation, getBalance, getLastOperations } from '../actions/operations';
+import { createOperation, deleteOperation, editOperation, getBalance, getLastOperations } from '../actions/operations';
 
 const Container = styled.div`
     width: 100%;
@@ -30,6 +30,7 @@ const Home = () => {
     const [categoryAdd, setCategoryAdd] = useState('');
 
     const [showEdit, setShowEdit] = useState(false);
+    const [opId, setOpId] = useState('');
     const [conceptEdit, setConceptEdit] = useState('');
     const [amountEdit, setAmountEdit] = useState(0);
     const [dateEdit, setDateEdit] = useState('');
@@ -43,8 +44,13 @@ const Home = () => {
         }, 1000);
     };
 
-    const handleEdit = (id) => {
-        dispatch()
+    const handleEdit = (e) => {
+        e.preventDefault();
+        dispatch(editOperation(opId, conceptEdit, amountEdit, dateEdit, categoryEdit));
+        setTimeout(function () {
+            dispatch(getLastOperations());
+            dispatch(getBalance());
+        }, 1000);
     };
 
     useEffect(() => {
@@ -84,6 +90,7 @@ const Home = () => {
                             handleEdit={handleEdit}
                             showEdit={showEdit}
                             setShowEdit={setShowEdit}
+                            setOpId={setOpId}
                             conceptEdit={conceptEdit}
                             setConceptEdit={setConceptEdit}
                             amountEdit={amountEdit}
