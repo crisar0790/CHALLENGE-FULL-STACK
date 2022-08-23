@@ -38,6 +38,12 @@ const OperationsList = () => {
   const [typeAdd, setTypeAdd] = useState('');
   const [categoryAdd, setCategoryAdd] = useState('');
 
+  const [showEdit, setShowEdit] = useState(false);
+  const [conceptEdit, setConceptEdit] = useState('');
+  const [amountEdit, setAmountEdit] = useState(0);
+  const [dateEdit, setDateEdit] = useState('');
+  const [categoryEdit, setCategoryEdit] = useState('');
+
   useEffect(() => {
     if (user) {
       dispatch(getTypes());
@@ -64,20 +70,20 @@ const OperationsList = () => {
 
   const handleDelete = (id) => {
     dispatch(deleteOperation(id));
-    setTimeout(function(){
+    setTimeout(function () {
       dispatch(getOperations(type, category, order));
       dispatch(getBalance());
     }, 1000);
   };
 
-  const handleEdit = (id) => {
+  const handleEdit = (e) => {
     dispatch()
   };
 
   const handleAdd = (e) => {
     e.preventDefault();
     dispatch(createOperation(concept, amount, date, typeAdd, categoryAdd));
-    setTimeout(function(){
+    setTimeout(function () {
       dispatch(getOperations(type, category, order));
       dispatch(getBalance());
     }, 1000);
@@ -105,7 +111,20 @@ const OperationsList = () => {
           setDate={setDate}
           setTypeAdd={setTypeAdd}
           setCategoryAdd={setCategoryAdd} />
-        <Operations allOperations={operations} handleDelete={handleDelete} handleEdit={handleEdit} />
+        <Operations
+          allOperations={operations}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+          showEdit={showEdit}
+          setShowEdit={setShowEdit}
+          conceptEdit={conceptEdit}
+          setConceptEdit={setConceptEdit}
+          amountEdit={amountEdit}
+          setAmountEdit={setAmountEdit}
+          dateEdit={dateEdit}
+          setDateEdit={setDateEdit}
+          categoryEdit={categoryEdit}
+          setCategoryEdit={setCategoryEdit} />
       </Container>
       <Footer />
     </div>

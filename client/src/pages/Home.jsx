@@ -29,9 +29,15 @@ const Home = () => {
     const [typeAdd, setTypeAdd] = useState('');
     const [categoryAdd, setCategoryAdd] = useState('');
 
+    const [showEdit, setShowEdit] = useState(false);
+    const [conceptEdit, setConceptEdit] = useState('');
+    const [amountEdit, setAmountEdit] = useState(0);
+    const [dateEdit, setDateEdit] = useState('');
+    const [categoryEdit, setCategoryEdit] = useState('');
+
     const handleDelete = (id) => {
         dispatch(deleteOperation(id));
-        setTimeout(function(){
+        setTimeout(function () {
             dispatch(getBalance());
             dispatch(getLastOperations());
         }, 1000);
@@ -51,7 +57,7 @@ const Home = () => {
     const handleAdd = (e) => {
         e.preventDefault();
         dispatch(createOperation(concept, amount, date, typeAdd, categoryAdd));
-        setTimeout(function(){
+        setTimeout(function () {
             dispatch(getBalance());
             dispatch(getLastOperations());
         }, 1000);
@@ -67,7 +73,6 @@ const Home = () => {
                         <LastOpertions
                             lastOperations={lastOperations}
                             handleDelete={handleDelete}
-                            handleEdit={handleEdit}
                             showAdd={showAdd}
                             setShowAdd={setShowAdd}
                             handleAdd={handleAdd}
@@ -75,7 +80,18 @@ const Home = () => {
                             setAmount={setAmount}
                             setDate={setDate}
                             setTypeAdd={setTypeAdd}
-                            setCategoryAdd={setCategoryAdd} />
+                            setCategoryAdd={setCategoryAdd}
+                            handleEdit={handleEdit}
+                            showEdit={showEdit}
+                            setShowEdit={setShowEdit}
+                            conceptEdit={conceptEdit}
+                            setConceptEdit={setConceptEdit}
+                            amountEdit={amountEdit}
+                            setAmountEdit={setAmountEdit}
+                            dateEdit={dateEdit}
+                            setDateEdit={setDateEdit}
+                            categoryEdit={categoryEdit}
+                            setCategoryEdit={setCategoryEdit} />
                     </Container>
                     :
                     <WithoutLogin />
