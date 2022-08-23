@@ -37,14 +37,35 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
-const LastOpertions = ({ lastOperations, handleDelete, handleEdit }) => {
-    const [showAdd, setShowAdd] = useState(false);
-    if (!lastOperations.length) {
+const LastOpertions = ({
+    lastOperations,
+    handleDelete,
+    handleEdit,
+    showAdd,
+    setShowAdd,
+    handleAdd,
+    setConcept,
+    setAmount,
+    setDate,
+    setTypeAdd,
+    setCategoryAdd, }) => {
+    if (!lastOperations?.length) {
         return (
             <Container>
                 <Wrapper>
                     <Title>You have not registered operations yet.</Title>
                     <Button onClick={() => setShowAdd(true)} >Add operation</Button>
+                    <AddOperation
+                        showAdd={showAdd}
+                        onClose={() => setShowAdd(false)}
+                        setShowAdd={setShowAdd}
+                        handleAdd={handleAdd}
+                        setConcept={setConcept}
+                        setAmount={setAmount}
+                        setDate={setDate}
+                        setTypeAdd={setTypeAdd}
+                        setCategoryAdd={setCategoryAdd}
+                    />
                 </Wrapper>
             </Container>
         )
@@ -58,7 +79,17 @@ const LastOpertions = ({ lastOperations, handleDelete, handleEdit }) => {
                     <Button onClick={() => window.scroll(0, 0)}>Show more operations</Button>
                 </Link>
                 <Button onClick={() => setShowAdd(true)} >Add operation</Button>
-                <AddOperation showAdd={showAdd} onClose={() => setShowAdd(false)} setShowAdd={setShowAdd} />
+                <AddOperation
+                    showAdd={showAdd}
+                    onClose={() => setShowAdd(false)}
+                    setShowAdd={setShowAdd}
+                    handleAdd={handleAdd}
+                    setConcept={setConcept}
+                    setAmount={setAmount}
+                    setDate={setDate}
+                    setTypeAdd={setTypeAdd}
+                    setCategoryAdd={setCategoryAdd}
+                />
             </Wrapper>
         </Container>
     )
