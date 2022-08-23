@@ -1,4 +1,4 @@
-import { DELETE_OPERATION, GET_BALANCE, GET_CATEGORIES, GET_LAST_OPERATIONS, GET_OPERATIONS, GET_TYPES } from "../actions/types";
+import { CREATE_OPERATION, DELETE_OPERATION, GET_BALANCE, GET_CATEGORIES, GET_LAST_OPERATIONS, GET_OPERATIONS, GET_TYPES } from "../actions/types";
 
 const initialState = {
     balance: {},
@@ -36,10 +36,14 @@ export default function (state = initialState, action) {
                 ...state,
                 categories: payload.categories
             };
+        case CREATE_OPERATION:
+            return {
+                ...state
+            };
         case DELETE_OPERATION:
             return {
                 ...state
-            }
+            };
         default:
             return state;
     }
