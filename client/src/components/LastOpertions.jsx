@@ -40,7 +40,6 @@ const Button = styled.button`
 const LastOpertions = ({
     lastOperations,
     handleDelete,
-    handleEdit,
     showAdd,
     setShowAdd,
     handleAdd,
@@ -48,7 +47,18 @@ const LastOpertions = ({
     setAmount,
     setDate,
     setTypeAdd,
-    setCategoryAdd, }) => {
+    setCategoryAdd,
+    handleEdit,
+    showEdit,
+    setShowEdit,
+    conceptEdit,
+    setConceptEdit,
+    amountEdit,
+    setAmountEdit,
+    dateEdit,
+    setDateEdit,
+    categoryEdit,
+    setCategoryEdit }) => {
     if (!lastOperations?.length) {
         return (
             <Container>
@@ -74,7 +84,20 @@ const LastOpertions = ({
         <Container>
             <Wrapper>
                 <Title>Last Operations</Title>
-                <Operations lastOperations={lastOperations} handleDelete={handleDelete} handleEdit={handleEdit} />
+                <Operations 
+                lastOperations={lastOperations} 
+                handleDelete={handleDelete} 
+                handleEdit={handleEdit}
+                showEdit={showEdit}
+                setShowEdit={setShowEdit}
+                conceptEdit={conceptEdit}
+                setConceptEdit={setConceptEdit}
+                amountEdit={amountEdit}
+                setAmountEdit={setAmountEdit}
+                dateEdit={dateEdit}
+                setDateEdit={setDateEdit}
+                categoryEdit={categoryEdit}
+                setCategoryEdit={setCategoryEdit}/>
                 <Link to='/operations'>
                     <Button onClick={() => window.scroll(0, 0)}>Show more operations</Button>
                 </Link>
