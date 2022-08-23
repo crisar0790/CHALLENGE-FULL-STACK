@@ -18,14 +18,20 @@ const Table = styled.table`
     width: 100%;
     line-height:2rem;
     overflow-x: auto;
+    border-collapse: collapse;
 `;
 
 const THead = styled.thead``;
 
-const Row = styled.tr``;
+const Row = styled.tr`
+    border-collapse: collapse;
+    background: ${props => (props.bg%2 !== 0)  ? '#EAECEE' : '#F8F9F9'};
+`;
 
 const Column = styled.th`
     padding: 0 10px;
+    border-collapse: collapse;
+    border-bottom: 1px solid teal;
 `;
 
 const TBody = styled.tbody`
@@ -71,18 +77,20 @@ const Operations = ({ lastOperations, allOperations, handleDelete, handleEdit })
                 <Wrapper>
                     <Table>
                         <THead>
-                            <Row>
+                            <Row bg={2} >
                                 <Column>Type</Column>
                                 <Column>Category</Column>
                                 <Column>Concept</Column>
                                 <Column>Amount</Column>
                                 <Column>Date</Column>
+                                <Column>Edit</Column>
+                                <Column>Delete</Column>
                             </Row>
                         </THead>
                         <TBody>
                             {
                                 lastOperations?.map((op, k) => ( 
-                                    <Row key={k}>
+                                    <Row key={k} bg={k} >
                                         <Column>{op.type.type}</Column>
                                         <Column>{op.category.category}</Column>
                                         <Column>{op.concept}</Column>
@@ -104,18 +112,20 @@ const Operations = ({ lastOperations, allOperations, handleDelete, handleEdit })
                 <Wrapper>
                     <Table>
                         <THead>
-                            <Row>
+                            <Row bg={2} >
                                 <Column>Type</Column>
                                 <Column>Category</Column>
                                 <Column>Concept</Column>
                                 <Column>Amount</Column>
                                 <Column>Date</Column>
+                                <Column>Edit</Column>
+                                <Column>Delete</Column>
                             </Row>
                         </THead>
                         <TBody>
                             {
                                 allOperations?.map((op, k) => (
-                                    <Row key={k}>
+                                    <Row key={k} bg={k} >
                                         <Column>{op.type.type}</Column>
                                         <Column>{op.category.category}</Column>
                                         <Column>{op.concept}</Column>
