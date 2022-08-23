@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar';
 import Operations from '../components/Operations';
 import Balance from '../components/Balance';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTypes, getCategories, getOperations, deleteOperation } from '../actions/operations';
+import { getTypes, getCategories, getOperations, deleteOperation, createOperation, getBalance } from '../actions/operations';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -32,13 +32,20 @@ const OperationsList = () => {
   const [category, setCategory] = useState('');
   const [order, setOrder] = useState('des');
 
+  const [concept, setConcept] = useState('');
+  const [amount, setAmount] = useState(0);
+  const [date, setDate] = useState('');
+  const [typeAdd, setTypeAdd] = useState('');
+  const [categoryAdd, setCategoryAdd] = useState('');
+
   useEffect(() => {
     if (user) {
       dispatch(getTypes());
       dispatch(getCategories());
       dispatch(getOperations(type, category, order));
+      dispatch(getBalance());
     }
-  }, [dispatch, type, category, order]);
+  }, [dispatch, createOperation, deleteOperation]);
 
   const handleGetOperationsByOrder = (e) => {
     setOrder(e.target.value);
@@ -64,6 +71,14 @@ const OperationsList = () => {
     dispatch()
   };
 
+  const handleAdd = (e) => {
+    e.preventDefault();
+    dispatch(createOperation(concept, amount, date, typeAdd, categoryAdd));
+    dispatch(getOperations(type, category, order));
+  };
+
+
+
   if (!user) {
     navigate('/');
   }
@@ -77,7 +92,13 @@ const OperationsList = () => {
           categories={categories}
           handleGetOperationsByOrder={handleGetOperationsByOrder}
           handleGetOperationsByType={handleGetOperationsByType}
-          handleGetOperationsByCategory={handleGetOperationsByCategory} />
+          handleGetOperationsByCategory={handleGetOperationsByCategory}
+          handleAdd={handleAdd}
+          setConcept={setConcept}
+          setAmount={setAmount}
+          setDate={setDate}
+          setTypeAdd={setTypeAdd}
+          setCategoryAdd={setCategoryAdd} />
         <Operations allOperations={operations} handleDelete={handleDelete} handleEdit={handleEdit} />
       </Container>
       <Footer />
