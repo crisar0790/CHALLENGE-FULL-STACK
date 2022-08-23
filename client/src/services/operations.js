@@ -86,9 +86,7 @@ async function deleteOperation(id) {
 
 const  createOperation = async (concept, amount, date, type, category) => {
     try {
-        const userId = JSON.parse(localStorage.getItem("user")).dataValues.id
-        const headers = authHeader()
-        console.log(headers.token)
+        const userId = JSON.parse(localStorage.getItem("user")).dataValues.id;
         if (userId) {
             return await axios.post(`${API_URL}/operations/create?userId=${userId}`, {concept, amount, date, type, category}, { headers: authHeader() })
                 .then((response) => response.data);
@@ -96,7 +94,18 @@ const  createOperation = async (concept, amount, date, type, category) => {
     } catch (error) {
         console.log(error)
     }
-}
+};
+
+const  editOperation = async (id, concept, amount, date, category) => {
+    try {
+        if (id) {
+            return await axios.patch(`${API_URL}/operations/modify?id=${id}`, {concept, amount, date, category}, { headers: authHeader() })
+                .then((response) => response.data);
+        }
+    } catch (error) {
+        console.log(error)
+    }
+};
 
 export default {
     getBalance,
@@ -105,5 +114,6 @@ export default {
     getTypes,
     getCategories,
     deleteOperation,
-    createOperation
+    createOperation,
+    editOperation
 };
