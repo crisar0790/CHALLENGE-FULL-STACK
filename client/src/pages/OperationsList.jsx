@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar';
 import Operations from '../components/Operations';
 import Balance from '../components/Balance';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTypes, getCategories, getOperations, deleteOperation, createOperation, getBalance } from '../actions/operations';
+import { getTypes, getCategories, getOperations, deleteOperation, createOperation, getBalance, editOperation } from '../actions/operations';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -39,6 +39,7 @@ const OperationsList = () => {
   const [categoryAdd, setCategoryAdd] = useState('');
 
   const [showEdit, setShowEdit] = useState(false);
+  const [opId, setOpId] = useState('');
   const [conceptEdit, setConceptEdit] = useState('');
   const [amountEdit, setAmountEdit] = useState(0);
   const [dateEdit, setDateEdit] = useState('');
@@ -77,7 +78,12 @@ const OperationsList = () => {
   };
 
   const handleEdit = (e) => {
-    dispatch()
+    e.preventDefault();
+    dispatch(editOperation(opId, conceptEdit, amountEdit, dateEdit, categoryEdit));
+    setTimeout(function () {
+      dispatch(getOperations(type, category, order));
+      dispatch(getBalance());
+    }, 1000);
   };
 
   const handleAdd = (e) => {
@@ -117,6 +123,8 @@ const OperationsList = () => {
           handleEdit={handleEdit}
           showEdit={showEdit}
           setShowEdit={setShowEdit}
+          opId={opId}
+          setOpId={setOpId}
           conceptEdit={conceptEdit}
           setConceptEdit={setConceptEdit}
           amountEdit={amountEdit}
