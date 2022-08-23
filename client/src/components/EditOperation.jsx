@@ -93,6 +93,7 @@ const EditOperation = ({
     showEdit,
     setShowEdit,
     handleEdit,
+    opId,
     setConceptEdit,
     conceptEdit,
     setAmountEdit,
