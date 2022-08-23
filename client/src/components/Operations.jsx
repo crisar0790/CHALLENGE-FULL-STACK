@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import EditOperation from './EditOperation';
 
 const Container = styled.div`
     width: 100%;
@@ -25,7 +26,7 @@ const THead = styled.thead``;
 
 const Row = styled.tr`
     border-collapse: collapse;
-    background: ${props => (props.bg%2 !== 0)  ? '#EAECEE' : '#F8F9F9'};
+    background: ${props => (props.bg % 2 !== 0) ? '#EAECEE' : '#F8F9F9'};
 `;
 
 const Column = styled.th`
@@ -70,7 +71,21 @@ const ButtonDelete = styled.button`
     }
 `;
 
-const Operations = ({ lastOperations, allOperations, handleDelete, handleEdit }) => {
+const Operations = ({
+    lastOperations,
+    allOperations,
+    handleDelete,
+    handleEdit,
+    showEdit,
+    setShowEdit,
+    conceptEdit,
+    setConceptEdit,
+    amountEdit,
+    setAmountEdit,
+    dateEdit,
+    setDateEdit,
+    categoryEdit,
+    setCategoryEdit }) => {
     if (lastOperations) {
         return (
             <Container>
@@ -89,15 +104,34 @@ const Operations = ({ lastOperations, allOperations, handleDelete, handleEdit })
                         </THead>
                         <TBody>
                             {
-                                lastOperations?.map((op, k) => ( 
+                                lastOperations?.map((op, k) => (
                                     <Row key={k} bg={k} >
                                         <Column>{op.type.type}</Column>
                                         <Column>{op.category.category}</Column>
                                         <Column>{op.concept}</Column>
                                         <Column>{op.amount}</Column>
                                         <Column>{(op.date).split('T')[0].split('-').reverse().join('-')}</Column>
-                                        <Column><Button onClick={() => handleEdit(op.id)} >Edit</Button></Column>
+                                        <Column><Button
+                                            onClick={() => {
+                                                setConceptEdit(op.concept);
+                                                setAmountEdit(op.amount);
+                                                setDateEdit(op.date);
+                                                setCategoryEdit(op.category.category);
+                                                setShowEdit(true)
+                                            }} >Edit</Button></Column>
                                         <Column><ButtonDelete onClick={() => handleDelete(op.id)} >Delete</ButtonDelete></Column>
+                                        <EditOperation
+                                            handleEdit={handleEdit}
+                                            showEdit={showEdit}
+                                            setShowEdit={setShowEdit}
+                                            conceptEdit={conceptEdit}
+                                            setConceptEdit={setConceptEdit}
+                                            amountEdit={amountEdit}
+                                            setAmountEdit={setAmountEdit}
+                                            dateEdit={dateEdit}
+                                            setDateEdit={setDateEdit}
+                                            categoryEdit={categoryEdit}
+                                            setCategoryEdit={setCategoryEdit} />
                                     </Row>
                                 ))
                             }
@@ -131,8 +165,27 @@ const Operations = ({ lastOperations, allOperations, handleDelete, handleEdit })
                                         <Column>{op.concept}</Column>
                                         <Column>{op.amount}</Column>
                                         <Column>{(op.date).split('T')[0].split('-').reverse().join('-')}</Column>
-                                        <Column><Button onClick={() => handleEdit(op.id)} >Edit</Button></Column>
+                                        <Column><Button
+                                            onClick={() => {
+                                                setConceptEdit(op.concept);
+                                                setAmountEdit(op.amount);
+                                                setDateEdit(op.date);
+                                                setCategoryEdit(op.category.category);
+                                                setShowEdit(true)
+                                            }} >Edit</Button></Column>
                                         <Column><ButtonDelete onClick={() => handleDelete(op.id)} >Delete</ButtonDelete></Column>
+                                        <EditOperation
+                                            handleEdit={handleEdit}
+                                            showEdit={showEdit}
+                                            setShowEdit={setShowEdit}
+                                            conceptEdit={conceptEdit}
+                                            setConceptEdit={setConceptEdit}
+                                            amountEdit={amountEdit}
+                                            setAmountEdit={setAmountEdit}
+                                            dateEdit={dateEdit}
+                                            setDateEdit={setDateEdit}
+                                            categoryEdit={categoryEdit}
+                                            setCategoryEdit={setCategoryEdit} />
                                     </Row>
                                 ))
                             }
