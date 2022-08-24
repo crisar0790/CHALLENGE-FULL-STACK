@@ -2,7 +2,8 @@ import React from 'react';
 import styled from "styled-components";
 import { logout } from "../actions/auth";
 import { useDispatch } from 'react-redux';
-import { clearLastOperations, clearOperations } from '../actions/operations';
+import { useNavigate } from 'react-router-dom';
+import { clearData } from '../actions/operations';
 
 const Container = styled.div`
     min-height: 100vh;
@@ -58,13 +59,13 @@ const Button = styled.button`
 
 const PopupLogout = ({ showLogout, onClose, setShowLogout }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         dispatch(logout());
-        window.location.reload();
+        navigate('/');
+        dispatch(clearData());
         setShowLogout(false);
-        dispatch(clearLastOperations());
-        dispatch(clearOperations());
     };
 
     if (!showLogout) return null;
