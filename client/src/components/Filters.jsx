@@ -48,7 +48,7 @@ const FilterSelect = styled.select`
 const FilterOption = styled.option``;
 
 const Button = styled.button`
-    margin: 10px 5px;
+    margin: 10px 20px;
     border: none;
     padding: 15px 20px;
     background-color: teal;
