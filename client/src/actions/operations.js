@@ -79,3 +79,17 @@ export const editOperation = (id, concept, amount, date, category) => async (dis
             })
         })
 };
+
+export const clearOperations = () => {
+    return {
+        type: GET_OPERATIONS,
+        payload: { operations: undefined }
+    }
+};
+
+export const clearLastOperations = () => {
+    return {
+        type: GET_LAST_OPERATIONS,
+        payload: { lastOperations: undefined }
+    }
+};

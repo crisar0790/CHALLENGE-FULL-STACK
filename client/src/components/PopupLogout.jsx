@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import { logout } from "../actions/auth";
 import { useDispatch } from 'react-redux';
+import { clearLastOperations, clearOperations } from '../actions/operations';
 
 const Container = styled.div`
     min-height: 100vh;
@@ -59,11 +60,13 @@ const PopupLogout = ({ showLogout, onClose, setShowLogout }) => {
     const dispatch = useDispatch();
 
     const handleLogout = () => {
-        console.log('funciona');
         dispatch(logout());
         window.location.reload();
         setShowLogout(false);
-    }
+        dispatch(clearLastOperations());
+        dispatch(clearOperations());
+    };
+
     if (!showLogout) return null;
     return (
         <Container>
