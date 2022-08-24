@@ -65,6 +65,10 @@ const Button = styled.button`
     background-color: teal;
     color: white;
     cursor: pointer;
+    &:disabled {
+        background-color: gray;
+        cursor: not-allowed;
+    }
 `;
 
 const Link = styled.a`
@@ -110,9 +114,9 @@ const Login = ({ showLogin, onClose, register }) => {
                 <ButtonClose><GrClose style={{ fontSize: "1em", cursor: "pointer" }} onClick={onClose} /></ButtonClose>
                 <Title>LOGIN</Title>
                 <Form>
-                    <Input placeholder='email' onChange={(e) => { setEmail(e.target.value) }} />
-                    <Input type='password' placeholder='password' onChange={(e) => { setPassword(e.target.value) }} />
-                    <Button onClick={handleLogin}>LOGIN</Button>
+                    <Input placeholder='email' onChange={(e) => { /\S+@\S+\.\S+/.test(e.target.value) ? setEmail(e.target.value) : setEmail('') }} />
+                    <Input type='password' placeholder='password' onChange={(e) => { e.target.value.length >= 6 ? setPassword(e.target.value) : setPassword('') }} />
+                    <Button onClick={handleLogin} disabled={email === '' || password === ''} >LOGIN</Button>
                     {message && <Error>{message}</Error>}
                     <Link onClick={register}>CREATE A NEW ACCOUNT</Link>
                 </Form>
