@@ -45,6 +45,10 @@ const OperationsList = () => {
   const [dateEdit, setDateEdit] = useState('');
   const [categoryEdit, setCategoryEdit] = useState('');
 
+  const [conceptChange, setConceptChange] = useState('');
+  const [amountChange, setAmountChange] = useState(0);
+  const [dateChange, setDateChange] = useState('');
+
   useEffect(() => {
     if (user) {
       dispatch(getTypes());
@@ -132,7 +136,13 @@ const OperationsList = () => {
           dateEdit={dateEdit}
           setDateEdit={setDateEdit}
           categoryEdit={categoryEdit}
-          setCategoryEdit={setCategoryEdit} />
+          setCategoryEdit={setCategoryEdit}
+          conceptChange={conceptChange}
+          setConceptChange={setConceptChange}
+          amountChange={amountChange}
+          setAmountChange={setAmountChange}
+          dateChange={dateChange}
+          setDateChange={setDateChange} />
       </Container>
       <Footer />
     </div>

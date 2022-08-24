@@ -36,6 +36,10 @@ const Home = () => {
     const [dateEdit, setDateEdit] = useState('');
     const [categoryEdit, setCategoryEdit] = useState('');
 
+    const [conceptChange, setConceptChange] = useState('');
+    const [amountChange, setAmountChange] = useState(0);
+    const [dateChange, setDateChange] = useState('');
+
     const handleDelete = (id) => {
         dispatch(deleteOperation(id));
         setTimeout(function () {
@@ -98,7 +102,13 @@ const Home = () => {
                             dateEdit={dateEdit}
                             setDateEdit={setDateEdit}
                             categoryEdit={categoryEdit}
-                            setCategoryEdit={setCategoryEdit} />
+                            setCategoryEdit={setCategoryEdit}
+                            conceptChange={conceptChange}
+                            setConceptChange={setConceptChange}
+                            amountChange={amountChange}
+                            setAmountChange={setAmountChange}
+                            dateChange={dateChange}
+                            setDateChange={setDateChange} />
                     </Container>
                     :
                     <WithoutLogin />

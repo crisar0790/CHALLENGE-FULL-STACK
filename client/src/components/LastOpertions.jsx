@@ -59,7 +59,13 @@ const LastOpertions = ({
     dateEdit,
     setDateEdit,
     categoryEdit,
-    setCategoryEdit }) => {
+    setCategoryEdit,
+    conceptChange,
+    setConceptChange,
+    amountChange,
+    setAmountChange,
+    dateChange,
+    setDateChange }) => {
     if (!lastOperations?.length) {
         return (
             <Container>
@@ -85,21 +91,27 @@ const LastOpertions = ({
         <Container>
             <Wrapper>
                 <Title>Last Operations</Title>
-                <Operations 
-                lastOperations={lastOperations} 
-                handleDelete={handleDelete} 
-                handleEdit={handleEdit}
-                showEdit={showEdit}
-                setShowEdit={setShowEdit}
-                setOpId={setOpId}
-                conceptEdit={conceptEdit}
-                setConceptEdit={setConceptEdit}
-                amountEdit={amountEdit}
-                setAmountEdit={setAmountEdit}
-                dateEdit={dateEdit}
-                setDateEdit={setDateEdit}
-                categoryEdit={categoryEdit}
-                setCategoryEdit={setCategoryEdit}/>
+                <Operations
+                    lastOperations={lastOperations}
+                    handleDelete={handleDelete}
+                    handleEdit={handleEdit}
+                    showEdit={showEdit}
+                    setShowEdit={setShowEdit}
+                    setOpId={setOpId}
+                    conceptEdit={conceptEdit}
+                    setConceptEdit={setConceptEdit}
+                    amountEdit={amountEdit}
+                    setAmountEdit={setAmountEdit}
+                    dateEdit={dateEdit}
+                    setDateEdit={setDateEdit}
+                    categoryEdit={categoryEdit}
+                    setCategoryEdit={setCategoryEdit}
+                    conceptChange={conceptChange}
+                    setConceptChange={setConceptChange}
+                    amountChange={amountChange}
+                    setAmountChange={setAmountChange}
+                    dateChange={dateChange}
+                    setDateChange={setDateChange} />
                 <Link to='/operations'>
                     <Button onClick={() => window.scroll(0, 0)}>Show more operations</Button>
                 </Link>
