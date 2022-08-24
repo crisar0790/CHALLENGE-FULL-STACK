@@ -92,12 +92,31 @@ const Button = styled.button`
     background-color: teal;
     color: white;
     cursor: pointer;
+    &:disabled {
+        background-color: gray;
+        cursor: not-allowed;
+    }
 `;
 
-const AddOperation = ({ showAdd, onClose, setShowAdd, handleAdd, setConcept, setAmount, setDate, setTypeAdd, setCategoryAdd }) => {
+const AddOperation = ({
+    showAdd,
+    onClose,
+    setShowAdd,
+    handleAdd,
+    setConcept,
+    setAmount,
+    setDate,
+    setTypeAdd,
+    setCategoryAdd }) => {
     const { types } = useSelector(state => state.operations);
     const { categories } = useSelector(state => state.operations);
     const dispatch = useDispatch();
+
+    const [conceptChange, setConceptChange] = useState('');
+    const [amountChange, setAmountChange] = useState(0);
+    const [dateChange, setDateChange] = useState('');
+    const [typeChange, setTypeChange] = useState('');
+    const [categoryChange, setCategoryChange] = useState('');
 
     useEffect(() => {
         dispatch(getTypes());
@@ -109,17 +128,26 @@ const AddOperation = ({ showAdd, onClose, setShowAdd, handleAdd, setConcept, set
     return (
         <Container>
             <Wrapper>
-                <ButtonClose><GrClose style={{ fontSize: "1em", cursor: "pointer" }} onClick={onClose} /></ButtonClose>
+                <ButtonClose>
+                    <GrClose style={{ fontSize: "1em", cursor: "pointer" }}
+                        onClick={() => {
+                            setShowAdd(false);
+                            setConceptChange(''); 
+                            setAmountChange(0); 
+                            setDateChange('');
+                            setCategoryChange('');
+                            setTypeChange('')
+                        }} /></ButtonClose>
                 <Title>ADD OPERATION</Title>
                 <Form>
-                    <Input placeholder='concept' onChange={(e) => { setConcept(e.target.value) }} />
-                    <Input placeholder='amount' type='number' onChange={(e) => { setAmount(e.target.value) }} />
-                    <Input type='date' onChange={(e) => { setDate(e.target.value) }} />
+                    <Input placeholder='concept' onChange={(e) => { setConcept(e.target.value); setConceptChange(e.target.value) }} />
+                    <Input placeholder='amount' type='number' onChange={(e) => { setAmount(e.target.value); setAmountChange(e.target.value) }} />
+                    <Input type='date' onChange={(e) => { setDate(e.target.value); setDateChange(e.target.value) }} />
 
                     <SubContainer>
                         <Select>
                             <Label>Type</Label>
-                            <Type onChange={(e) => setTypeAdd(e.target.value)} >
+                            <Type onChange={(e) => { setTypeAdd(e.target.value); setTypeChange(e.target.value) }} >
                                 <Option value='' enable='disabled' >Choose one</Option>
                                 {
                                     types?.map((t, k) => (
@@ -130,7 +158,7 @@ const AddOperation = ({ showAdd, onClose, setShowAdd, handleAdd, setConcept, set
                         </Select>
                         <Select>
                             <Label>Category</Label>
-                            <Category onChange={(e) => setCategoryAdd(e.target.value)}>
+                            <Category onChange={(e) => { setCategoryAdd(e.target.value); setCategoryChange(e.target.value) }}>
                                 <Option value='' enable='disabled' >Choose one</Option>
                                 {
                                     categories?.map((c, k) => (
@@ -141,7 +169,15 @@ const AddOperation = ({ showAdd, onClose, setShowAdd, handleAdd, setConcept, set
                         </Select>
                     </SubContainer>
 
-                    <Button onClick={(e) => { handleAdd(e); setShowAdd(false) }}>CREATE</Button>
+                    <Button
+                        onClick={(e) => { handleAdd(e); 
+                            setShowAdd(false);
+                            setConceptChange(''); 
+                            setAmountChange(0); 
+                            setDateChange('');
+                            setCategoryChange('');
+                            setTypeChange('') }}
+                        disabled={conceptChange === '' || amountChange === 0 || amountChange === '' || dateChange === '' || typeChange === '' || categoryChange === ''} >CREATE</Button>
                 </Form>
             </Wrapper>
         </Container>
