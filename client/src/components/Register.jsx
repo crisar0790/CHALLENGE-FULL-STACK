@@ -40,6 +40,7 @@ const ButtonClose = styled.button`
 `;
 
 const Title = styled.h1`
+    margin-top: 1rem;
     font-size: 24px;
     font-weight: 300;
     text-align: center;
@@ -70,18 +71,23 @@ const Button = styled.button`
     background-color: teal;
     color: white;
     cursor: pointer;
+    &:disabled {
+        background-color: gray;
+        cursor: not-allowed;
+    }
 `;
 
-const Register = ({ showRegister, onClose, setShowRegister }) => {
+const Register = ({ showRegister, setShowRegister }) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const dispatch = useDispatch(); 
+    const [password2, setPassword2] = useState('');
+    const dispatch = useDispatch();
 
     const handleRegister = (e) => {
         e.preventDefault();
-        if (firstName, lastName, email, password) {
+        if (firstName !== '' && lastName !== '' && email !== '' && password !== ''&& password2 !== '' && password === password2) {
             dispatch(register(firstName, lastName, email, password));
         }
         setShowRegister(false);
@@ -91,19 +97,32 @@ const Register = ({ showRegister, onClose, setShowRegister }) => {
     return (
         <Container>
             <Wrapper>
-                <ButtonClose><GrClose style={{ fontSize: "1em", cursor: "pointer" }} onClick={onClose} /></ButtonClose>
+                <ButtonClose>
+                    <GrClose style={{ fontSize: "1em", cursor: "pointer" }}
+                        onClick={() => { setShowRegister(false);
+                            setFirstName('');
+                            setLastName('');
+                            setEmail('');
+                            setPassword('');
+                            setPassword2('') }} /></ButtonClose>
                 <Title>CREATE AN ACCOUNT</Title>
                 <Form>
                     <Input placeholder='first name' onChange={(e) => { setFirstName(e.target.value) }} />
                     <Input placeholder='last name' onChange={(e) => { setLastName(e.target.value) }} />
-                    <Input placeholder='email' onChange={(e) => { setEmail(e.target.value) }} />
-                    <Input type='password' placeholder='password' onChange={(e) => { setPassword(e.target.value) }} />
-                    <Input type='password' placeholder='confirm password' />
+                    <Input placeholder='email' onChange={(e) => { /\S+@\S+\.\S+/.test(e.target.value) ? setEmail(e.target.value) : setEmail('') }} />
+                    <Input type='password' placeholder='password with at least 6 characters' onChange={(e) => { e.target.value.length >= 6 ? setPassword(e.target.value) : setPassword('') }} />
+                    <Input type='password' placeholder='confirm password' onChange={(e) => { setPassword2(e.target.value) }} />
                     <Agreement>
                         By creating an account, I consent to the processing of my personal
                         data in accordance with the <b>PRIVACY POLICY</b>
                     </Agreement>
-                    <Button onClick={handleRegister}>CREATE</Button>
+                    <Button onClick={() => {handleRegister();
+                            setFirstName('');
+                            setLastName('');
+                            setEmail('');
+                            setPassword('');
+                            setPassword2('')}}
+                        disabled={firstName === '' || lastName === '' || email === '' || password === '' || password2 === '' || password !== password2} >CREATE</Button>
                 </Form>
             </Wrapper>
         </Container>
