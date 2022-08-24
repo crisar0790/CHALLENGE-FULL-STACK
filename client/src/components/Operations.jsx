@@ -78,7 +78,6 @@ const Operations = ({
     handleEdit,
     showEdit,
     setShowEdit,
-    opId,
     setOpId,
     conceptEdit,
     setConceptEdit,
@@ -87,7 +86,14 @@ const Operations = ({
     dateEdit,
     setDateEdit,
     categoryEdit,
-    setCategoryEdit }) => {
+    setCategoryEdit,
+    conceptChange,
+    setConceptChange,
+    amountChange,
+    setAmountChange,
+    dateChange,
+    setDateChange
+}) => {
     if (lastOperations) {
         return (
             <Container>
@@ -116,8 +122,11 @@ const Operations = ({
                                         <Column><Button
                                             onClick={() => {
                                                 setConceptEdit(op.concept);
+                                                setConceptChange(op.concept);
                                                 setAmountEdit(op.amount);
+                                                setAmountChange(op.amount);
                                                 setDateEdit(op.date);
+                                                setDateChange(op.date);
                                                 setCategoryEdit(op.category.category);
                                                 setOpId(op.id)
                                                 setShowEdit(true)
@@ -134,7 +143,14 @@ const Operations = ({
                                             dateEdit={dateEdit}
                                             setDateEdit={setDateEdit}
                                             categoryEdit={categoryEdit}
-                                            setCategoryEdit={setCategoryEdit} />
+                                            setCategoryEdit={setCategoryEdit}
+                                            conceptChange={conceptChange}
+                                            setConceptChange={setConceptChange}
+                                            amountChange={amountChange}
+                                            setAmountChange={setAmountChange}
+                                            dateChange={dateChange}
+                                            setDateChange={setDateChange}
+                                             />
                                     </Row>
                                 ))
                             }
@@ -170,11 +186,14 @@ const Operations = ({
                                         <Column>{(op.date).split('T')[0].split('-').reverse().join('-')}</Column>
                                         <Column><Button
                                             onClick={() => {
-                                                setOpId(op.id)
                                                 setConceptEdit(op.concept);
+                                                setConceptChange(op.concept);
                                                 setAmountEdit(op.amount);
+                                                setAmountChange(op.amount);
                                                 setDateEdit(op.date);
+                                                setDateChange(op.date);
                                                 setCategoryEdit(op.category.category);
+                                                setOpId(op.id)
                                                 setShowEdit(true)
                                             }} >Edit</Button></Column>
                                         <Column><ButtonDelete onClick={() => handleDelete(op.id)} >Delete</ButtonDelete></Column>
@@ -189,7 +208,13 @@ const Operations = ({
                                             dateEdit={dateEdit}
                                             setDateEdit={setDateEdit}
                                             categoryEdit={categoryEdit}
-                                            setCategoryEdit={setCategoryEdit} />
+                                            setCategoryEdit={setCategoryEdit}
+                                            conceptChange={conceptChange}
+                                            setConceptChange={setConceptChange}
+                                            amountChange={amountChange}
+                                            setAmountChange={setAmountChange}
+                                            dateChange={dateChange}
+                                            setDateChange={setDateChange} />
                                     </Row>
                                 ))
                             }
