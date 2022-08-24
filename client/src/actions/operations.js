@@ -1,4 +1,4 @@
-import { GET_BALANCE, GET_CATEGORIES, GET_LAST_OPERATIONS, GET_TYPES, GET_OPERATIONS, DELETE_OPERATION, CREATE_OPERATION, EDIT_OPERATION } from "./types";
+import { GET_BALANCE, GET_CATEGORIES, GET_LAST_OPERATIONS, GET_TYPES, GET_OPERATIONS, DELETE_OPERATION, CREATE_OPERATION, EDIT_OPERATION, CLEAR_DATA } from "./types";
 import opService from '../services/operations';
 
 export const getBalance = () => async (dispatch) => {
@@ -80,16 +80,8 @@ export const editOperation = (id, concept, amount, date, category) => async (dis
         })
 };
 
-export const clearOperations = () => {
+export const clearData = () => {
     return {
-        type: GET_OPERATIONS,
-        payload: { operations: undefined }
-    }
-};
-
-export const clearLastOperations = () => {
-    return {
-        type: GET_LAST_OPERATIONS,
-        payload: { lastOperations: undefined }
+        type: CLEAR_DATA
     }
 };
