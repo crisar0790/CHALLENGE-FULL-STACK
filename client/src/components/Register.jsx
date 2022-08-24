@@ -3,6 +3,11 @@ import styled from "styled-components";
 import { GrClose } from 'react-icons/gr';
 import { register } from "../actions/auth";
 import { useDispatch } from "react-redux";
+import authHeader from '../services/headers';
+import axios from "axios";
+import swal from "sweetalert";
+
+const API_URL = process.env.REACT_APP_BASE_URL;
 
 const Container = styled.div`
     min-height: 100vh;
@@ -85,12 +90,27 @@ const Register = ({ showRegister, setShowRegister }) => {
     const [password2, setPassword2] = useState('');
     const dispatch = useDispatch();
 
-    const handleRegister = (e) => {
+    async function handleRegister(e) {
         e.preventDefault();
-        if (firstName !== '' && lastName !== '' && email !== '' && password !== ''&& password2 !== '' && password === password2) {
-            dispatch(register(firstName, lastName, email, password));
+        try {
+            await axios.get(`${API_URL}/user/?email=${email}`)
+            swal("That email has already been registered!", {
+                icon: "error",
+            });
+        } catch (error) {
+            if (firstName !== '' && lastName !== '' && email !== '' && password !== '' && password2 !== '' && password === password2) {
+                dispatch(register(firstName, lastName, email, password));
+            }
+            swal("Registered user!", {
+                icon: "success",
+            });
+            setShowRegister(false);
+            setFirstName('');
+            setLastName('');
+            setEmail('');
+            setPassword('');
+            setPassword2('')
         }
-        setShowRegister(false);
     };
 
     if (!showRegister) return null;
@@ -99,12 +119,14 @@ const Register = ({ showRegister, setShowRegister }) => {
             <Wrapper>
                 <ButtonClose>
                     <GrClose style={{ fontSize: "1em", cursor: "pointer" }}
-                        onClick={() => { setShowRegister(false);
+                        onClick={() => {
+                            setShowRegister(false);
                             setFirstName('');
                             setLastName('');
                             setEmail('');
                             setPassword('');
-                            setPassword2('') }} /></ButtonClose>
+                            setPassword2('')
+                        }} /></ButtonClose>
                 <Title>CREATE AN ACCOUNT</Title>
                 <Form>
                     <Input placeholder='first name' onChange={(e) => { setFirstName(e.target.value) }} />
@@ -116,12 +138,7 @@ const Register = ({ showRegister, setShowRegister }) => {
                         By creating an account, I consent to the processing of my personal
                         data in accordance with the <b>PRIVACY POLICY</b>
                     </Agreement>
-                    <Button onClick={() => {handleRegister();
-                            setFirstName('');
-                            setLastName('');
-                            setEmail('');
-                            setPassword('');
-                            setPassword2('')}}
+                    <Button onClick={(e) => { handleRegister(e) }}
                         disabled={firstName === '' || lastName === '' || email === '' || password === '' || password2 === '' || password !== password2} >CREATE</Button>
                 </Form>
             </Wrapper>
