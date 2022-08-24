@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from "styled-components";
 import { GrClose } from 'react-icons/gr';
 import { useDispatch, useSelector } from "react-redux";
@@ -87,13 +87,22 @@ const Button = styled.button`
     background-color: teal;
     color: white;
     cursor: pointer;
+    &:disabled {
+        background-color: gray;
+        cursor: not-allowed;
+    }
 `;
 
 const EditOperation = ({
     showEdit,
     setShowEdit,
     handleEdit,
-    opId,
+    conceptChange,
+    setConceptChange,
+    amountChange,
+    setAmountChange,
+    dateChange,
+    setDateChange,
     setConceptEdit,
     conceptEdit,
     setAmountEdit,
@@ -104,6 +113,8 @@ const EditOperation = ({
     categoryEdit }) => {
     const { categories } = useSelector(state => state.operations);
     const dispatch = useDispatch();
+
+    console.log({ conceptChange, amountChange, dateChange })
 
     useEffect(() => {
         dispatch(getCategories());
@@ -116,12 +127,14 @@ const EditOperation = ({
     return (
         <Container>
             <Wrapper>
-                <ButtonClose><GrClose style={{ fontSize: "1em", cursor: "pointer" }} onClick={() => setShowEdit(false)} /></ButtonClose>
+                <ButtonClose>
+                    <GrClose style={{ fontSize: "1em", cursor: "pointer" }}
+                        onClick={() => { setShowEdit(false) }} /></ButtonClose>
                 <Title>EDIT OPERATION</Title>
                 <Form>
-                    <Input placeholder='concept' value={conceptEdit} onChange={(e) => { setConceptEdit(e.target.value) }} />
-                    <Input placeholder='amount' value={amountEdit} type='number' onChange={(e) => { setAmountEdit(e.target.value) }} />
-                    <Input type='date' value={dateEdit.split('T')[0].split('-').join('-')} onChange={(e) => { setDateEdit(e.target.value) }} />
+                    <Input placeholder='concept' value={conceptEdit} onChange={(e) => { setConceptEdit(e.target.value); setConceptChange(e.target.value) }} />
+                    <Input placeholder='amount' value={amountEdit} type='number' onChange={(e) => { setAmountEdit(e.target.value); setAmountChange(e.target.value) }} />
+                    <Input type='date' value={dateEdit.split('T')[0].split('-').join('-')} onChange={(e) => { setDateEdit(e.target.value); setDateChange(e.target.value) }} />
 
                     <SubContainer>
                         <Select>
@@ -137,7 +150,10 @@ const EditOperation = ({
                         </Select>
                     </SubContainer>
 
-                    <Button onClick={(e) => { handleEdit(e); setShowEdit(false) }}>EDIT</Button>
+                    <Button
+                        onClick={(e) => { handleEdit(e); setShowEdit(false) }}
+                        disabled={conceptChange === '' || amountChange === 0 || amountChange === '' || dateChange === ''}
+                    >EDIT</Button>
                 </Form>
             </Wrapper>
         </Container>
