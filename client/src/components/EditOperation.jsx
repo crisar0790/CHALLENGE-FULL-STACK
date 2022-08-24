@@ -114,8 +114,6 @@ const EditOperation = ({
     const { categories } = useSelector(state => state.operations);
     const dispatch = useDispatch();
 
-    console.log({ conceptChange, amountChange, dateChange })
-
     useEffect(() => {
         dispatch(getCategories());
     }, [dispatch]);
