@@ -5,6 +5,7 @@ import { FaUserCircle } from 'react-icons/fa';
 import Register from './Register';
 import Login from './Login';
 import PopupLogout from './PopupLogout';
+import { mobile } from '../responsive';
 
 const Container = styled.div`
     height: 60px;
@@ -32,6 +33,7 @@ const Left = styled.div`
 const Center = styled.div`
     flex: 1;
     text-align: center;
+    ${mobile({display: "none"})}
 `;
 
 const Title = styled.h1`
@@ -43,6 +45,7 @@ const Right = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    ${mobile({flex: "2"})}
 `;
 
 const MenuItem = styled.div`
@@ -80,7 +83,7 @@ const Navbar = () => {
                         </Right>
                 }
                 <Register showRegister={showRegister} onClose={() => setShowRegister(false)} setShowRegister={setShowRegister} />
-                <Login showLogin={showLogin} onClose={() => setShowLogin(false)} register={() => {setShowLogin(false); setShowRegister(true)}} />
+                <Login showLogin={showLogin} onClose={() => setShowLogin(false)} register={() => { setShowLogin(false); setShowRegister(true) }} />
                 <PopupLogout showLogout={showLogout} onClose={() => setShowLogout(false)} setShowLogout={setShowLogout} />
             </Wrapper>
         </Container>
