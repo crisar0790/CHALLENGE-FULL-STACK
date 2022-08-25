@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
 import { GrClose } from 'react-icons/gr';
 import { useDispatch, useSelector } from "react-redux";
-import { createOperation, getCategories, getTypes } from '../actions/operations';
+import { getCategories, getTypes } from '../actions/operations';
+import {mobile} from '../responsive';
 
 const Container = styled.div`
     min-height: 100vh;
@@ -27,6 +28,7 @@ const Wrapper = styled.div`
     box-sizing: border-box;
     overflow: hidden;
     font-size: 1.3rem;
+    ${mobile({width: "90%"})}
 `;
 
 const ButtonClose = styled.button`
@@ -62,6 +64,7 @@ const SubContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    ${mobile({flexDirection: "column"})}
 `;
 
 const Select = styled.div`
