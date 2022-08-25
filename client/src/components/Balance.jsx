@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import { mobile } from '../responsive';
 
 const Container = styled.div`
     width: 100%;
@@ -16,6 +17,7 @@ const Wrapper = styled.div`
     box-shadow: 0 8px 2px -2px teal;
     box-sizing: border-box;
     font-size: 1.3rem;
+    ${mobile({width: "90%"})}
 `;
 
 const Title = styled.h2`
@@ -32,6 +34,7 @@ const Total = styled.div`
 const SubContainer = styled.div`
     display: flex;
     justify-content: space-evenly;
+    ${mobile({flexDirection: "column", textAlign: "center"})}
 `;
 
 const Income = styled.div``;
