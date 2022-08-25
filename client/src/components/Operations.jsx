@@ -3,23 +3,30 @@ import styled from "styled-components";
 import EditOperation from './EditOperation';
 
 const Container = styled.div`
-    width: 100%;
+    width: auto;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
 `;
 
 const Wrapper = styled.div`
-    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: auto;
+    padding-right: auto;
     box-sizing: border-box;
+    height: auto;
+	width: 320px;
+	overflow: auto;
 `;
 
 const Table = styled.table`
     margin: auto;
     width: 100%;
     line-height:2rem;
-    overflow-x: auto;
     border-collapse: collapse;
+    overflow: auto;
 `;
 
 const THead = styled.thead``;
@@ -30,6 +37,7 @@ const Row = styled.tr`
 `;
 
 const Column = styled.th`
+    min-width: 90px;
     padding: 0 10px;
     border-collapse: collapse;
     border-bottom: 1px solid teal;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 import AddOperation from './AddOperation';
+import { mobile } from '../responsive';
 
 const Container = styled.div`
     width: 100%;
@@ -18,7 +19,7 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow-x: auto;
+    ${mobile({flexDirection: "column"})}
 `;
 
 const Order = styled.div`
