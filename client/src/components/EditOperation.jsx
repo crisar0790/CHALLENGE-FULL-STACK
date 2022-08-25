@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { GrClose } from 'react-icons/gr';
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from '../actions/operations';
+import { mobile } from '../responsive';
 
 const Container = styled.div`
     min-height: 100vh;
@@ -27,6 +28,7 @@ const Wrapper = styled.div`
     box-sizing: border-box;
     overflow: hidden;
     font-size: 1.3rem;
+    ${mobile({width: "90%"})}
 `;
 
 const ButtonClose = styled.button`
