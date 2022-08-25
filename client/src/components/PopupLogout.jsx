@@ -4,6 +4,7 @@ import { logout } from "../actions/auth";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { clearData } from '../actions/operations';
+import { mobile } from '../responsive';
 
 const Container = styled.div`
     min-height: 100vh;
@@ -28,6 +29,7 @@ const Wrapper = styled.div`
     box-sizing: border-box;
     overflow: hidden;
     font-size: 1.3rem;
+    ${mobile({width: "90%"})}
 `;
 
 const Title = styled.h1`
