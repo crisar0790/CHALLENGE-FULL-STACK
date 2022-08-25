@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { GrClose } from 'react-icons/gr';
 import { register } from "../actions/auth";
 import { useDispatch } from "react-redux";
-import authHeader from '../services/headers';
+import { mobile } from '../responsive';
 import axios from "axios";
 import swal from "sweetalert";
 
@@ -32,6 +32,7 @@ const Wrapper = styled.div`
     box-sizing: border-box;
     overflow: hidden;
     font-size: 1.3rem;
+    ${mobile({width: "90%"})}
 `;
 
 const ButtonClose = styled.button`
