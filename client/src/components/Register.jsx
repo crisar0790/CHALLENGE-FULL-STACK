@@ -64,6 +64,17 @@ const Input = styled.input`
     padding: 10px;
 `;
 
+const Select = styled.div`
+    margin: 10px 5px;
+`;
+
+const Currency = styled.select`
+    padding: 10px;    
+    width: 100%;
+`;
+
+const Option = styled.option``;
+
 const Agreement = styled.span`
     font-size: 12px;
     margin: 20px 5px;
@@ -89,6 +100,7 @@ const Register = ({ showRegister, setShowRegister }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
+    const [currency, setCurrency] = useState('');
     const dispatch = useDispatch();
 
     async function handleRegister(e) {
@@ -99,8 +111,8 @@ const Register = ({ showRegister, setShowRegister }) => {
                 icon: "error",
             });
         } catch (error) {
-            if (firstName !== '' && lastName !== '' && email !== '' && password !== '' && password2 !== '' && password === password2) {
-                dispatch(register(firstName, lastName, email, password));
+            if (firstName !== '' && lastName !== '' && email !== '' && currency !== ''  && password !== '' && password2 !== '' && password === password2) {
+                dispatch(register(firstName, lastName, email, currency, password));
             }
             swal("Registered user!", {
                 icon: "success",
@@ -109,6 +121,7 @@ const Register = ({ showRegister, setShowRegister }) => {
             setFirstName('');
             setLastName('');
             setEmail('');
+            setCurrency('');
             setPassword('');
             setPassword2('')
         }
@@ -133,6 +146,14 @@ const Register = ({ showRegister, setShowRegister }) => {
                     <Input placeholder='first name' onChange={(e) => { setFirstName(e.target.value) }} />
                     <Input placeholder='last name' onChange={(e) => { setLastName(e.target.value) }} />
                     <Input placeholder='email' onChange={(e) => { /\S+@\S+\.\S+/.test(e.target.value) ? setEmail(e.target.value) : setEmail('') }} />
+                    <Select>
+                            <Currency onChange={(e) => { setCurrency(e.target.value) }} >
+                                <Option value='' enable='disabled' >Choose one currency</Option>
+                                <Option value='$' >Argentine pesos ($)</Option>
+                                <Option value='USD' >American dollar (USD)</Option>
+                                <Option value='€' >Euro (€)</Option>
+                            </Currency>
+                        </Select>
                     <Input type='password' placeholder='password with at least 6 characters' onChange={(e) => { e.target.value.length >= 6 ? setPassword(e.target.value) : setPassword('') }} />
                     <Input type='password' placeholder='confirm password' onChange={(e) => { setPassword2(e.target.value) }} />
                     <Agreement>
@@ -140,7 +161,7 @@ const Register = ({ showRegister, setShowRegister }) => {
                         data in accordance with the <b>PRIVACY POLICY</b>
                     </Agreement>
                     <Button onClick={(e) => { handleRegister(e) }}
-                        disabled={firstName === '' || lastName === '' || email === '' || password === '' || password2 === '' || password !== password2} >CREATE</Button>
+                        disabled={firstName === '' || lastName === '' || email === '' || currency === ''  || password === '' || password2 === '' || password !== password2} >CREATE</Button>
                 </Form>
             </Wrapper>
         </Container>
