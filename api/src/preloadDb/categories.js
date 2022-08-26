@@ -9,6 +9,9 @@ const categories = [
         category: 'Profits'
     },
     {
+        category: 'Sales'
+    },
+    {
         category: 'Retirement pension'
     },
     {
@@ -21,7 +24,7 @@ const categories = [
         category: 'Service payment'
     },
     {
-        category: 'Payment of fees'
+        category: 'Tax payment'
     },
     {
         category: 'Education expenses'
