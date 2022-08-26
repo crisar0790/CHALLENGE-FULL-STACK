@@ -6,6 +6,7 @@ import Register from './Register';
 import Login from './Login';
 import PopupLogout from './PopupLogout';
 import { mobile } from '../responsive';
+import Profile from './Profile';
 
 const Container = styled.div`
     height: 60px;
@@ -60,6 +61,7 @@ const Navbar = () => {
     const [showRegister, setShowRegister] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
     const [showLogout, setShowLogout] = useState(false);
+    const [showProfile, setShowProfile] = useState(false);
 
     return (
         <Container>
@@ -74,7 +76,7 @@ const Navbar = () => {
                     user ?
                         <Right>
                             <MenuItem onClick={() => setShowLogout(true)}>LOG OUT</MenuItem>
-                            <FaUserCircle style={{ fontSize: "2em", paddingLeft: "25px", cursor: "pointer" }} />
+                            <FaUserCircle style={{ fontSize: "2em", paddingLeft: "25px", cursor: "pointer" }} onClick={() => {setShowProfile(true)}} />
                         </Right>
                         :
                         <Right>
@@ -85,6 +87,7 @@ const Navbar = () => {
                 <Register showRegister={showRegister} onClose={() => setShowRegister(false)} setShowRegister={setShowRegister} />
                 <Login showLogin={showLogin} onClose={() => setShowLogin(false)} register={() => { setShowLogin(false); setShowRegister(true) }} />
                 <PopupLogout showLogout={showLogout} onClose={() => setShowLogout(false)} setShowLogout={setShowLogout} />
+                <Profile showProfile={showProfile} setShowProfile={setShowProfile} />
             </Wrapper>
         </Container>
     )
