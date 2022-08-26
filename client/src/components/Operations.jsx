@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import EditOperation from './EditOperation';
+import { mobile } from '../responsive';
 
 const Container = styled.div`
     width: auto;
@@ -16,9 +17,7 @@ const Wrapper = styled.div`
     padding-left: auto;
     padding-right: auto;
     box-sizing: border-box;
-    height: auto;
-	width: 320px;
-	overflow: auto;
+    ${mobile({height: "auto", width: "320px", overflow: "auto"})}
 `;
 
 const Table = styled.table`
