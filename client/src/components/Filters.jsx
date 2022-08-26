@@ -24,26 +24,34 @@ const Wrapper = styled.div`
 
 const Order = styled.div`
     margin: 10px 20px;
+    ${mobile({width: "100%"})}
 `;
 
-const OrderDate = styled.label``;
+const OrderDate = styled.label`
+    ${mobile({display: "none"})}
+`;
 
 const OrderDateSelect = styled.select`
     margin-left: 10px;
     padding: 5px;
+    ${mobile({width: "100%", marginLeft: "0"})}
 `;
 
 const OrderDateOption = styled.option``;
 
 const Filter = styled.div`
     margin: 10px 20px;
+    ${mobile({width: "100%"})}
 `;
 
-const FilterTitle = styled.label``;
+const FilterTitle = styled.label`
+    ${mobile({display: "none"})}
+`;
 
 const FilterSelect = styled.select`
     margin-left: 10px;
     padding: 5px;
+    ${mobile({width: "100%", marginLeft: "0"})}
 `;
 
 const FilterOption = styled.option``;
