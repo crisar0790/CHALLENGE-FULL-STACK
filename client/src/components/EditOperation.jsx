@@ -28,7 +28,7 @@ const Wrapper = styled.div`
     box-sizing: border-box;
     overflow: hidden;
     font-size: 1.3rem;
-    ${mobile({width: "90%"})}
+    ${mobile({ width: "90%" })}
 `;
 
 const ButtonClose = styled.button`
@@ -67,16 +67,14 @@ const SubContainer = styled.div`
 `;
 
 const Select = styled.div`
+    flex: 1;
+    min-width: 40%;
     margin: 10px 5px;
 `;
 
-const Label = styled.label`
-    font-size: 14px;
-`;
-
 const Category = styled.select`
-    margin-left: 10px;
-    padding: 5px;
+    padding: 10px;
+    width: 100%;
 `;
 
 const Option = styled.option``;
@@ -135,21 +133,16 @@ const EditOperation = ({
                     <Input placeholder='concept' value={conceptEdit} onChange={(e) => { setConceptEdit(e.target.value); setConceptChange(e.target.value) }} />
                     <Input placeholder='amount' value={amountEdit} type='number' onChange={(e) => { setAmountEdit(e.target.value); setAmountChange(e.target.value) }} />
                     <Input type='date' value={dateEdit.split('T')[0].split('-').join('-')} onChange={(e) => { setDateEdit(e.target.value); setDateChange(e.target.value) }} />
-
-                    <SubContainer>
-                        <Select>
-                            <Label>Category</Label>
-                            <Category onChange={(e) => setCategoryEdit(e.target.value)}>
-                                <Option value={categoryEdit} >{categoryEdit}</Option>
-                                {
-                                    categoriesFiltered?.map((c, k) => (
-                                        <Option key={k} value={c.category} >{c.category}</Option>
-                                    ))
-                                }
-                            </Category>
-                        </Select>
-                    </SubContainer>
-
+                    <Select>
+                        <Category onChange={(e) => setCategoryEdit(e.target.value)}>
+                            <Option value={categoryEdit} >{categoryEdit}</Option>
+                            {
+                                categoriesFiltered?.map((c, k) => (
+                                    <Option key={k} value={c.category} >{c.category}</Option>
+                                ))
+                            }
+                        </Category>
+                    </Select>
                     <Button
                         onClick={(e) => { handleEdit(e); setShowEdit(false) }}
                         disabled={conceptChange === '' || amountChange === 0 || amountChange === '' || dateChange === ''}
