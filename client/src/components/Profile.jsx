@@ -63,7 +63,7 @@ const Item = styled.p`
 `;
 
 const Profile = ({showProfile, setShowProfile}) => {
-    const user = JSON.parse(localStorage.getItem("user")).dataValues;
+    const user = JSON.parse(localStorage.getItem("user")) ? JSON.parse(localStorage.getItem("user")).dataValues : undefined;
 
     if (!showProfile) return null;
 
@@ -75,10 +75,10 @@ const Profile = ({showProfile, setShowProfile}) => {
                         onClick={() => { setShowProfile(false) }} /></ButtonClose>
                 <Title>PROFILE INFORMATION</Title>
                 <SubContainer>
-                    <Item>First name: {user.firstName}</Item>
-                    <Item>Last name: {user.lastName}</Item>
-                    <Item>Email: {user.email}</Item>
-                    <Item>Currency: {user.currency}</Item>
+                    <Item>First name: {user?.firstName}</Item>
+                    <Item>Last name: {user?.lastName}</Item>
+                    <Item>Email: {user?.email}</Item>
+                    <Item>Currency: {user?.currency}</Item>
                 </SubContainer>
             </Wrapper>
         </Container>
