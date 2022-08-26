@@ -19,6 +19,9 @@ module.exports = (sequelize) => {
         allowNull: false,
         unique: true,
       },
+      currency: {
+        type: DataTypes.ENUM('$', 'USD', '€')
+      },
       password:{
         type:DataTypes.STRING,
       },
