@@ -59,13 +59,6 @@ const Input = styled.input`
     padding: 10px;
 `;
 
-const SubContainer = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
-
 const Select = styled.div`
     flex: 1;
     min-width: 40%;

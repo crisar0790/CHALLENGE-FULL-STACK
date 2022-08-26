@@ -97,7 +97,6 @@ const Button = styled.button`
 
 const AddOperation = ({
     showAdd,
-    onClose,
     setShowAdd,
     handleAdd,
     setConcept,
