@@ -42,14 +42,15 @@ const Income = styled.div``;
 const Expense = styled.div``;
 
 const Balance = ({balance}) => {
+    const currency = JSON.parse(localStorage.getItem("user")).dataValues.currency;
     return (
         <Container>
             <Wrapper>
                 <Title>Balance</Title>
-                <Total>Total: $ {balance?.total || 0}</Total>
+                <Total>Total: {currency} {balance?.total || 0}</Total>
                 <SubContainer>
-                    <Income>Income: $ {balance?.income || 0}</Income>
-                    <Expense>Expense: $ {balance?.expense || 0}</Expense>
+                    <Income>Income: {currency} {balance?.income || 0}</Income>
+                    <Expense>Expense: {currency} {balance?.expense || 0}</Expense>
                 </SubContainer>
             </Wrapper>
         </Container>
