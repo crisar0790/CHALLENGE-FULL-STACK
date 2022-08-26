@@ -32,7 +32,7 @@ const Wrapper = styled.div`
     box-sizing: border-box;
     overflow: hidden;
     font-size: 1.3rem;
-    ${mobile({width: "90%"})}
+    ${mobile({ width: "90%" })}
 `;
 
 const ButtonClose = styled.button`
@@ -111,7 +111,7 @@ const Register = ({ showRegister, setShowRegister }) => {
                 icon: "error",
             });
         } catch (error) {
-            if (firstName !== '' && lastName !== '' && email !== '' && currency !== ''  && password !== '' && password2 !== '' && password === password2) {
+            if (firstName !== '' && lastName !== '' && email !== '' && currency !== '' && password !== '' && password2 !== '' && password === password2) {
                 dispatch(register(firstName, lastName, email, currency, password));
             }
             swal("Registered user!", {
@@ -147,13 +147,13 @@ const Register = ({ showRegister, setShowRegister }) => {
                     <Input placeholder='last name' onChange={(e) => { setLastName(e.target.value) }} />
                     <Input placeholder='email' onChange={(e) => { /\S+@\S+\.\S+/.test(e.target.value) ? setEmail(e.target.value) : setEmail('') }} />
                     <Select>
-                            <Currency onChange={(e) => { setCurrency(e.target.value) }} >
-                                <Option value='' enable='disabled' >Choose one currency</Option>
-                                <Option value='$' >Argentine pesos ($)</Option>
-                                <Option value='USD' >American dollar (USD)</Option>
-                                <Option value='€' >Euro (€)</Option>
-                            </Currency>
-                        </Select>
+                        <Currency onChange={(e) => { setCurrency(e.target.value) }} >
+                            <Option value='' enable='disabled' >Choose one currency</Option>
+                            <Option value='$' >Argentine pesos ($)</Option>
+                            <Option value='USD' >American dollar (USD)</Option>
+                            <Option value='€' >Euro (€)</Option>
+                        </Currency>
+                    </Select>
                     <Input type='password' placeholder='password with at least 6 characters' onChange={(e) => { e.target.value.length >= 6 ? setPassword(e.target.value) : setPassword('') }} />
                     <Input type='password' placeholder='confirm password' onChange={(e) => { setPassword2(e.target.value) }} />
                     <Agreement>
@@ -161,7 +161,7 @@ const Register = ({ showRegister, setShowRegister }) => {
                         data in accordance with the <b>PRIVACY POLICY</b>
                     </Agreement>
                     <Button onClick={(e) => { handleRegister(e) }}
-                        disabled={firstName === '' || lastName === '' || email === '' || currency === ''  || password === '' || password2 === '' || password !== password2} >CREATE</Button>
+                        disabled={firstName === '' || lastName === '' || email === '' || currency === '' || password === '' || password2 === '' || password !== password2} >CREATE</Button>
                 </Form>
             </Wrapper>
         </Container>
