@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { verifyToken } = require('./verifyToken');
 const { User } = require('../db');
 
 router.get('/', async (req, res) => {
