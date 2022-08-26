@@ -62,27 +62,21 @@ const Input = styled.input`
 const SubContainer = styled.div`
     width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    ${mobile({flexDirection: "column"})}
+    flex-direction: column;
 `;
 
 const Select = styled.div`
     margin: 10px 5px;
 `;
 
-const Label = styled.label`
-    font-size: 14px;
-`;
-
 const Type = styled.select`
-    margin-left: 10px;
-    padding: 5px;
+    padding: 10px;
+    width: 100%;
 `;
 
 const Category = styled.select`
-    margin-left: 10px;
-    padding: 5px;
+    padding: 10px;
+    width: 100%;
 `;
 
 const Option = styled.option``;
@@ -149,9 +143,8 @@ const AddOperation = ({
 
                     <SubContainer>
                         <Select>
-                            <Label>Type</Label>
                             <Type onChange={(e) => { setTypeAdd(e.target.value); setTypeChange(e.target.value) }} >
-                                <Option value='' enable='disabled' >Choose one</Option>
+                                <Option value='' enable='disabled' >Choose one type</Option>
                                 {
                                     types?.map((t, k) => (
                                         <Option key={k} value={t.type} >{t.type}</Option>
@@ -160,9 +153,8 @@ const AddOperation = ({
                             </Type>
                         </Select>
                         <Select>
-                            <Label>Category</Label>
                             <Category onChange={(e) => { setCategoryAdd(e.target.value); setCategoryChange(e.target.value) }}>
-                                <Option value='' enable='disabled' >Choose one</Option>
+                                <Option value='' enable='disabled' >Choose one category</Option>
                                 {
                                     categories?.map((c, k) => (
                                         <Option key={k} value={c.category} >{c.category}</Option>
