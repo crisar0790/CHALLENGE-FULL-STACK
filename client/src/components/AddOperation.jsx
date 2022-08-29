@@ -137,7 +137,7 @@ const AddOperation = ({
                 <Title>ADD OPERATION</Title>
                 <Form>
                     <Input placeholder='concept' onChange={(e) => { setConcept(e.target.value); setConceptChange(e.target.value) }} />
-                    <Input placeholder='amount' type='number' onChange={(e) => { setAmount(e.target.value); setAmountChange(e.target.value) }} />
+                    <Input placeholder='amount: positive numbers' type='number' onChange={(e) => { setAmount(e.target.value); setAmountChange(e.target.value) }} />
                     <Input type='date' onChange={(e) => { setDate(e.target.value); setDateChange(e.target.value) }} />
 
                     <SubContainer>
@@ -171,7 +171,7 @@ const AddOperation = ({
                             setDateChange('');
                             setCategoryChange('');
                             setTypeChange('') }}
-                        disabled={conceptChange === '' || amountChange === 0 || amountChange === '' || dateChange === '' || typeChange === '' || categoryChange === ''} >CREATE</Button>
+                        disabled={conceptChange === '' || amountChange === 0 || amountChange === '' || amountChange < 0 || dateChange === '' || typeChange === '' || categoryChange === ''} >CREATE</Button>
                 </Form>
             </Wrapper>
         </Container>
