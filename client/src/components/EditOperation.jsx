@@ -124,7 +124,7 @@ const EditOperation = ({
                 <Title>EDIT OPERATION</Title>
                 <Form>
                     <Input placeholder='concept' value={conceptEdit} onChange={(e) => { setConceptEdit(e.target.value); setConceptChange(e.target.value) }} />
-                    <Input placeholder='amount' value={amountEdit} type='number' onChange={(e) => { setAmountEdit(e.target.value); setAmountChange(e.target.value) }} />
+                    <Input placeholder='amount: positive numbers' value={amountEdit} type='number' onChange={(e) => { setAmountEdit(e.target.value); setAmountChange(e.target.value) }} />
                     <Input type='date' value={dateEdit.split('T')[0].split('-').join('-')} onChange={(e) => { setDateEdit(e.target.value); setDateChange(e.target.value) }} />
                     <Select>
                         <Category onChange={(e) => setCategoryEdit(e.target.value)}>
@@ -138,7 +138,7 @@ const EditOperation = ({
                     </Select>
                     <Button
                         onClick={(e) => { handleEdit(e); setShowEdit(false) }}
-                        disabled={conceptChange === '' || amountChange === 0 || amountChange === '' || dateChange === ''}
+                        disabled={conceptChange === '' || amountChange === 0 || amountChange === '' || amountChange < 0 || dateChange === ''}
                     >EDIT</Button>
                 </Form>
             </Wrapper>
